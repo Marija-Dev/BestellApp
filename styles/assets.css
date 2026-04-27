@@ -1,8 +1,8 @@
 .hero-img {
+    max-width: 1440px;
+    margin: 0 auto;
     height: 400px;
     width: 100%;
-    
-    /* background-position: left; */
     object-fit: cover;
     object-position: 25%;
 }
@@ -12,10 +12,10 @@
     height: 200px;
     border-radius: 50%;
     border: 10px solid darkorchid;
-    margin-top: -100px;
+    margin-top: -110px;
 }
 
 .rating-img {
     height: 30px;
-    
+    margin-top: 10px;
 }

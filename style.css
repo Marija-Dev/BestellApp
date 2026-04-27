@@ -11,7 +11,6 @@ header {
     display: flex;
     align-items: center;
     height: 70px;
-    /* padding-left: 50px; */
 }
 
 .burger-menu {
@@ -36,16 +35,66 @@ header {
     align-items: center;
     height: 700px;
     background-color: white;
-
 }
 
 .heading-container {
     display: flex;
     align-items: center;
-    gap: 20px;
+}
+
+h1 {
+    font-family: "Palanquin-Bold";
+    font-size: 40px;
+    color: blueviolet;
+    margin: 0;
+}
+
+h2 {
+    font-family: "Palanquin-Bold";
+    font-size: 40px;
+    margin: 0;
+    padding-right: 20px;
+}
+
+h3 {
+    font-size: 30px;
+    color: white;
+}
+
+h4 {
+    font-size: 24px;
+}
+
+.category-titles-fullwidth {
+    background-color: blueviolet;
+    display: flex;
+    height: 60px;
+}
+
+.category-titles-content {
+    display: flex;
+    align-items: center;
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.burger-icon {
+    width: 90px;
+    height: 90px;
+    margin-top: -30px;
+    margin-left: 150px;
+}
+
+.heading-text {
+    margin: 0;
+    font-size: 25px;
+    font-weight: bold;
 }
 
 .content-container {
+    max-width: 1440px;
+    margin: 0 auto;
     display: flex;
     flex-direction: row;
     flex-grow: 1;
@@ -63,13 +112,5 @@ header {
     padding: 32px;
     font-size: 40px;
     height: 1500px;
-    background-color: brown;    
-}
-
-
-
-@font-face {
-    font-family: "Palanquin";
-    src: url("./assets/fonts/Palanquin/Palanquin-Regular.ttf");
-    font-weight: normal;
+    background-color: brown;
 }
