@@ -1,0 +1,21 @@
+.hero-img {
+    height: 400px;
+    width: 100%;
+    
+    /* background-position: left; */
+    object-fit: cover;
+    object-position: 25%;
+}
+
+.burger-logo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 10px solid darkorchid;
+    margin-top: -100px;
+}
+
+.rating-img {
+    height: 30px;
+    
+}
