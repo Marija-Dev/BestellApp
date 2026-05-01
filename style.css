@@ -61,10 +61,6 @@ h3 {
     color: white;
 }
 
-h4 {
-    font-size: 24px;
-}
-
 .category-titles-fullwidth {
     background-color: blueviolet;
     display: flex;
@@ -99,7 +95,7 @@ h4 {
     flex-direction: row;
     flex-grow: 1;
     gap: 2px;
-    background-color: green;
+    background-color: rgb(201, 129, 45);
 }
 
 .menu-content {
@@ -108,9 +104,51 @@ h4 {
     border: 2px solid goldenrod;
 }
 
-.menu {
+/* .menu {
     padding: 32px;
     font-size: 40px;
     height: 1500px;
     background-color: brown;
+} */
+
+.single-menu-card {
+    display: flex;
+    position: relative;
+    height: 150px;
+    background-color: aqua;
+    padding: 10px;
+    margin: 10px;
+    gap: 10px;
+}
+
+.single-menu-img {
+    height: 130px;
+    border-radius: 15px;
+}
+
+.single-meal-description {
+
+}
+
+.name-price-con {
+    display: flex;
+    flex-direction: row;
+}
+
+.meal-name {
+    font-size: 24px;
+    margin: 0;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 0;
+    position: absolute;
+    right: 40px;
+}
+
+.ingredients {
+    font-size: 20px;
+    margin: 0;
 }

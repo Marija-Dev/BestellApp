@@ -1,4 +1,4 @@
-let burgerSandwiches = [
+let  burgerAndSandwiches = [
     {
         "name": "Veggie mushroom black burger",
         "price": 16.90,
@@ -66,24 +66,31 @@ let salad = [
         "amount": 0
     },
 
-      {
+    {
         "name": "Mini green Salad",
         "price": 7.90,
         "ingredients": "Green salad, Cucumber, Carrots, Parsley, Radishes",
         "amount": 0
     },
 
-      {
+    {
         "name": "Green Salad with sea food",
         "price": 16.90,
         "ingredients": "Mixed greens, Cherry tomatoes, Red onion, Mussels, Squid rings, Shrimp, Dijon mustard-lemon dressing with dill",
         "amount": 0
     },
 
-      {
+    {
         "name": "Vegan green salad with tofu",
         "price": 14.90,
         "ingredients": "Green salad, Cherry tomatoes, Cucumber, Baby spinach, Edamame, Radishes, Bittercress, Tofu, Peanuts",
         "amount": 0
     },
+];
+
+let menuImages = [
+    "./assets/img/burger1.jpg",
+    "./assets/img/burger2.jpg",
+    "./assets/img/burger3.jpg",
+    "./assets/img/burger4.jpg"
 ]
