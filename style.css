@@ -61,11 +61,38 @@ h3 {
     color: white;
 }
 
-.category-titles-fullwidth {
+.burger-titles-fullwidth {
     background-color: blueviolet;
     display: flex;
     height: 60px;
+
+    width: 100%;
+    position: absolute;
+    left: 0;
 }
+
+.pizza-titles-fullwidth {
+    background-color: blueviolet;
+    display: flex;
+    height: 60px;
+
+    width: 100%;
+    position: absolute;
+    top: 1650px;
+    left: 0;
+}
+
+.salad-titles-fullwidth {
+    background-color: blueviolet;
+    display: flex;
+    height: 60px;
+
+    width: 100%;
+    position: absolute;
+    top: 2510px;
+    left: 0;
+}
+
 
 .category-titles-content {
     display: flex;
@@ -79,6 +106,18 @@ h3 {
     width: 90px;
     height: 90px;
     margin-top: -30px;
+    margin-left: 150px;
+}
+
+.pizza-icon {
+    width: 90px;
+    height: 90px;
+    margin-left: 150px;
+}
+
+.salad-icon {
+    width: 90px;
+    height: 90px;
     margin-left: 150px;
 }
 
@@ -98,9 +137,17 @@ h3 {
     background-color: rgb(201, 129, 45);
 }
 
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    width: 1000px;
+    
+}
+
 .menu-content {
-    width: calc(100% - 310px);
-    padding: 16px;
+    width: calc(100% - 100px);
+    padding: 80px 16px 16px 16px;
+    /* margin-bottom: 30px; */
     border: 2px solid goldenrod;
 }
 
@@ -115,9 +162,10 @@ h3 {
     display: flex;
     position: relative;
     height: 150px;
+    width: 700px;
     background-color: aqua;
-    padding: 10px;
-    margin: 10px;
+    padding: 20px 10px 10px 10px;
+    margin: 10px 10px 10px 90px;
     gap: 10px;
 }
 
@@ -149,6 +197,7 @@ h3 {
 }
 
 .ingredients {
-    font-size: 20px;
+    width: 320px;
+    font-size: 18px;
     margin: 0;
 }

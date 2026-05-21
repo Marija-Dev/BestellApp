@@ -88,9 +88,23 @@ let salad = [
     },
 ];
 
-let menuImages = [
+let burgerImages = [
     "./assets/img/burger1.jpg",
     "./assets/img/burger2.jpg",
     "./assets/img/burger3.jpg",
     "./assets/img/burger4.jpg"
+]
+
+let pizzaImages = [
+    "./assets/img/pizza1.jpg",
+    "./assets/img/pizza2.jpg",
+    "./assets/img/pizza3.jpg",
+    "./assets/img/pizza4.jpg"
+]
+
+let saladImages = [
+    "./assets/img/salad1.jpg",
+    "./assets/img/salad2.jpg",
+    "./assets/img/salad3.jpg",
+    "./assets/img/salad4.jpg"
 ]

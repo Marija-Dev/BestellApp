@@ -1,8 +1,8 @@
 .basket-container {
-    width: 300px;
+    width: 200px;
     flex-grow: 1;
-    padding: 16px;
-    border: 2px salmon;
+    padding: 0 0 16px 16px;
+    border: 2px rgb(210, 13, 13);
 }
 
 .basket {
