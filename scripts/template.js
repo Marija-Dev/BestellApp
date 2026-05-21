@@ -12,6 +12,8 @@ function getBurgerTemplate(indexBurger) {
                             <p class="ingredients">${burgerAndSandwiches[indexBurger].ingredients}</p>
                         </div>
                     </div>
+
+                    <button class="add-to-basket-button">Add to basket</button>
             </section>`
 }
 
@@ -29,6 +31,9 @@ function getPizzaTemplate(indexPizza) {
                             <p class="ingredients">${pizza[indexPizza].ingredients}</p>
                         </div>
                     </div>
+
+                    <button class="add-to-basket-button">Add to basket</button>
+
             </section>
            `
 }
@@ -47,6 +52,8 @@ function getSaladTemplate(indexSalad) {
                             <p class="ingredients">${salad[indexSalad].ingredients}</p>
                         </div>
                     </div>
+
+                    <button onclick="addToBasket" class="add-to-basket-button">Add to basket</button>
             </section>
            `
 }

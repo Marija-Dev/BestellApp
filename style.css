@@ -134,7 +134,7 @@ h3 {
     flex-direction: row;
     flex-grow: 1;
     gap: 2px;
-    background-color: rgb(201, 129, 45);
+    /* background-color: rgb(201, 129, 45); */
 }
 
 .menu-container {
@@ -148,7 +148,7 @@ h3 {
     width: calc(100% - 100px);
     padding: 80px 16px 16px 16px;
     /* margin-bottom: 30px; */
-    border: 2px solid goldenrod;
+    /* border: 2px solid goldenrod; */
 }
 
 /* .menu {
@@ -163,19 +163,16 @@ h3 {
     position: relative;
     height: 150px;
     width: 700px;
-    background-color: aqua;
+    background-color: rgb(221, 189, 252);
     padding: 20px 10px 10px 10px;
     margin: 10px 10px 10px 90px;
     gap: 10px;
+    border-radius: 20px;
 }
 
 .single-menu-img {
-    height: 130px;
+    height: 120px;
     border-radius: 15px;
-}
-
-.single-meal-description {
-
 }
 
 .name-price-con {
@@ -198,6 +195,30 @@ h3 {
 
 .ingredients {
     width: 320px;
-    font-size: 18px;
+    font-size: 16px;
     margin: 0;
+}
+
+.add-to-basket-button {
+    height: 30px;
+    width: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    border-radius: 20px;
+    border: 0;
+    font-size: 16px;
+    cursor: pointer;
+
+}
+
+footer {
+    background-color: blueviolet;
+    color: white;
+    display: flex;
+    justify-content: center;
+    gap: 80px;
 }

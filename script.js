@@ -28,6 +28,9 @@ function renderSalad() {
 
     for (let indexSalad = 0; indexSalad < salad.length; indexSalad++) {
         contentRef.innerHTML += getSaladTemplate(indexSalad);
-        
     }
+}
+
+function addToBasket() {
+    
 }
