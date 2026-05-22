@@ -13,7 +13,7 @@ function getBurgerTemplate(indexBurger) {
                         </div>
                     </div>
 
-                    <button class="add-to-basket-button">Add to basket</button>
+                    <button onclick="addToBasket(${indexBurger})" class="add-to-basket-button">Add to basket</button>
             </section>`
 }
 
@@ -32,7 +32,7 @@ function getPizzaTemplate(indexPizza) {
                         </div>
                     </div>
 
-                    <button class="add-to-basket-button">Add to basket</button>
+                    <button onclick="addToBasket" class="add-to-basket-button">Add to basket</button>
 
             </section>
            `
@@ -56,5 +56,14 @@ function getSaladTemplate(indexSalad) {
                     <button onclick="addToBasket" class="add-to-basket-button">Add to basket</button>
             </section>
            `
+}
+
+
+function getBurgerBasketTemplate(indexBurger) {
+    return `<section>
+                <h4 class="meal-name">${burgerAndSandwiches[indexBurger].name}</h4>
+            </section>
+            `
+
 }
 

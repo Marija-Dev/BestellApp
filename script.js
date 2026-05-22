@@ -31,6 +31,20 @@ function renderSalad() {
     }
 }
 
-function addToBasket() {
-    
+
+
+
+function addToBasket(indexBurger) {
+    let basket = document.getElementById("myBasket");
+
+
+
+
+    if (burgerAndSandwiches.amount != 0) {
+        burgerAndSandwiches.amount += 1;
+        basket.innerHTML += getBurgerBasketTemplate(indexBurger);
+    } else {
+
+
+    }
 }
