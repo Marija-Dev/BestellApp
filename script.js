@@ -1,50 +1,94 @@
 function init() {
-    renderBurger();
-    renderPizza();
-    renderSalad();
+    renderDishes();
 }
 
-function renderBurger() {
-    let contentRef = document.getElementById("allBurgers");
-    contentRef.innerHTML = "";
+function renderDishes() {
+    let burgerRef = document.getElementById("allBurgers");
+    let pizzaRef = document.getElementById("allPizza");
+    let saladRef = document.getElementById("allSalad");
 
-    for (let indexBurger = 0; indexBurger < burgerAndSandwiches.length; indexBurger++) {
-        contentRef.innerHTML += getBurgerTemplate(indexBurger);
+    burgerRef.innerHTML = "";
+    pizzaRef.innerHTML = "";
+    saladRef.innerHTML = "";
+
+    for (let indexDishes = 0; indexDishes < dishes.length; indexDishes++) {
+
+        if (dishes[indexDishes].category === "Burger & Sandwiches") {
+            burgerRef.innerHTML += getBurgerTemplate(indexDishes);
+        }
+
+        if (dishes[indexDishes].category === "Pizza") {
+            pizzaRef.innerHTML += getPizzaTemplate(indexDishes);
+        }
+
+        if (dishes[indexDishes].category === "Salad") {
+            saladRef.innerHTML += getSaladTemplate(indexDishes);
+        }
     }
 }
 
-function renderPizza() {
-    let contentRef = document.getElementById("allPizza");
-    contentRef.innerHTML = "";
+function addToBasket(indexDishes) {
+    let dishToBasket = dishes[indexDishes];
 
-    for (let indexPizza = 0; indexPizza < pizza.length; indexPizza++) {
-        contentRef.innerHTML += getPizzaTemplate(indexPizza);
+    menuToPush = {
+        name: dishToBasket.name,
+        price: dishToBasket.price,
+        amount: 1
     }
+
+    basket.push(menuToPush);
+
+    console.log("basket:", menuToPush);
+    
+    renderBasket();
+
+    // let basket = document.getElementById("myBasket");
+
+
+
+
+    // // let menuAmount = basketArray.find;
+
+    // let burgers = burgerAndSandwiches[indexBurger];
+    // let orderedMenu = document.getElementById("addedBasketMenu");
+
+    // // let dish = {
+    // //     name: burgerAndSandwiches[indexBurger].name,
+    // //     price: burgerAndSandwiches[indexBurger].price,
+    // //     amount: burgerAndSandwiches[indexBurger].amount
+    // // }
+
+    // // for (let indexBurger = 0; indexBurger < basketArray.length; indexBurger++) {
+    // // }
+
+    // if (basketArray.length === 0) {
+
+    //     burgers.amount++;
+    //     basketArray.push(getBurgerBasketTemplate(indexBurger));
+
+    //     orderedMenu.innerHTML += basketArray;
+
+    //     //    basketArray = !basketArray;
+    //     // orderedMenu.innerHTML + basketArray;
+
+    //     // basket.innerHTML += getBurgerBasketTemplate(indexBurger);
+    // }
+
+    // else if (basketArray.length !== 0) {
+
+    //     burgers.amount++;
+    // }
+
 }
 
-function renderSalad() {
-    let contentRef = document.getElementById("allSalad");
-    contentRef.innerHTML = "";
 
-    for (let indexSalad = 0; indexSalad < salad.length; indexSalad++) {
-        contentRef.innerHTML += getSaladTemplate(indexSalad);
+function renderBasket() {
+    basketRef = document.getElementById("addedBasketMenu");
+    basketRef.innerHTML = "";
+
+    for (let indexBasket = 0; indexBasket < basket.length; indexBasket++) {
+        basketRef.innerHTML += getBasketTemplate(indexBasket);
+        
     }
-}
 
-
-
-
-function addToBasket(indexBurger) {
-    let basket = document.getElementById("myBasket");
-
-
-
-
-    if (burgerAndSandwiches.amount != 0) {
-        burgerAndSandwiches.amount += 1;
-        basket.innerHTML += getBurgerBasketTemplate(indexBurger);
-    } else {
-
-
-    }
 }
