@@ -29,56 +29,25 @@ function renderDishes() {
 
 function addToBasket(indexDishes) {
     let dishToBasket = dishes[indexDishes];
+    let basketMenu = document.getElementById("addedBasketMenu");
+    
+    let found = basket.find(element => element.id === dishToBasket.id);
 
     menuToPush = {
+        id: dishToBasket.id,
         name: dishToBasket.name,
         price: dishToBasket.price,
         amount: 1
     }
 
-    basket.push(menuToPush);
+    if (found) {
+        found.amount++;
 
-    console.log("basket:", menuToPush);
-    
+    } else {
+        basket.push(menuToPush);
+    }
+
     renderBasket();
-
-    // let basket = document.getElementById("myBasket");
-
-
-
-
-    // // let menuAmount = basketArray.find;
-
-    // let burgers = burgerAndSandwiches[indexBurger];
-    // let orderedMenu = document.getElementById("addedBasketMenu");
-
-    // // let dish = {
-    // //     name: burgerAndSandwiches[indexBurger].name,
-    // //     price: burgerAndSandwiches[indexBurger].price,
-    // //     amount: burgerAndSandwiches[indexBurger].amount
-    // // }
-
-    // // for (let indexBurger = 0; indexBurger < basketArray.length; indexBurger++) {
-    // // }
-
-    // if (basketArray.length === 0) {
-
-    //     burgers.amount++;
-    //     basketArray.push(getBurgerBasketTemplate(indexBurger));
-
-    //     orderedMenu.innerHTML += basketArray;
-
-    //     //    basketArray = !basketArray;
-    //     // orderedMenu.innerHTML + basketArray;
-
-    //     // basket.innerHTML += getBurgerBasketTemplate(indexBurger);
-    // }
-
-    // else if (basketArray.length !== 0) {
-
-    //     burgers.amount++;
-    // }
-
 }
 
 
@@ -88,7 +57,5 @@ function renderBasket() {
 
     for (let indexBasket = 0; indexBasket < basket.length; indexBasket++) {
         basketRef.innerHTML += getBasketTemplate(indexBasket);
-        
     }
-
 }
