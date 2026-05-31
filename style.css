@@ -147,16 +147,7 @@ h3 {
 .menu-content {
     width: calc(100% - 100px);
     padding: 80px 16px 16px 16px;
-    /* margin-bottom: 30px; */
-    /* border: 2px solid goldenrod; */
 }
-
-/* .menu {
-    padding: 32px;
-    font-size: 40px;
-    height: 1500px;
-    background-color: brown;
-} */
 
 .single-menu-card {
     display: flex;
@@ -200,19 +191,24 @@ h3 {
 }
 
 .add-to-basket-button {
+    background-image: url("./assets/icons/add-to-basket.svg");
     height: 30px;
-    width: 110px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 115px;
+    border: 0;
+    border-radius: 20px;
     position: absolute;
     right: 20px;
     bottom: 20px;
-    border-radius: 20px;
-    border: 0;
     font-size: 16px;
     cursor: pointer;
 
+}
+
+.add-to-basket-button:hover {
+    background-image: url("./assets/icons/add-to-basket-hover.svg");
+    height: 30px;
+    width: 115px;
+    
 }
 
 footer {

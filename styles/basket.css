@@ -13,3 +13,64 @@
     top: 0;
     border-radius: 20px 0 0 20px;
 }
+
+.basket-menu-card {
+    display: flex;
+    flex-direction: column;
+
+    color: black;
+    font-weight: bold;
+    font-size: 22px;
+    background-color: rgb(221, 189, 252);
+    border-radius: 20px;
+    margin: 30px;
+    padding: 20px;
+}
+
+.basket-name-container {
+    display: flex;
+}
+
+.basket-x {
+    margin: 22px 5px 0 5px;
+}
+
+.basket-amount-container {
+    display: flex;
+    /* height: 30px; */
+
+}
+
+.basket-amount {
+    border: 0;
+    background-color: transparent;
+    height: 20px;
+    width: 20px;
+    margin: 0 0 0 5px;
+}
+
+.add-amount {
+    background-image: url("../assets/icons/add.png");
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: 0;
+    margin-top: 16px;
+    cursor: pointer;
+}
+
+.basket-menu-price {
+    position: absolute;
+    right: 50px;
+    margin: 0;
+}
+
+.delete-menu-button {
+    background-image: url("../assets/icons/trash.png");
+    background-repeat: no-repeat;
+    background-color: transparent;
+    width: 16px;
+    height: 18px;
+    border: 0;
+    margin-top: 14px;
+    cursor: pointer;
+}

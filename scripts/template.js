@@ -13,7 +13,7 @@ function getBurgerTemplate(indexDishes) {
                         </div>
                     </div>
 
-                    <button onclick="addToBasket(${indexDishes})" class="add-to-basket-button">Add to basket</button>
+                    <button onclick="addToBasket(${indexDishes})" class="add-to-basket-button"></button>
             </section>`
 }
 
@@ -32,7 +32,7 @@ function getPizzaTemplate(indexDishes) {
                         </div>
                     </div>
 
-                    <button onclick="addToBasket(${indexDishes})" class="add-to-basket-button">Add to basket</button>
+                    <button onclick="addToBasket(${indexDishes})" class="add-to-basket-button"></button>
 
             </section>
            `
@@ -53,18 +53,27 @@ function getSaladTemplate(indexDishes) {
                         </div>
                     </div>
 
-                    <button onclick="addToBasket(${indexDishes})" class="add-to-basket-button">Add to basket</button>
+                    <button onclick="addToBasket(${indexDishes})" class="add-to-basket-button"></button>
             </section>
            `
 }
 
 
 function getBasketTemplate(indexBasket) {
-    return `<section >
-                <p id="menuAmount-${indexBasket}">${basket[indexBasket].amount}</p>
-                
-                <h4 class="meal-name">${basket[indexBasket].name}</h4>
+    return `<section class="basket-menu-card">
+                <div class="basket-name-container">
+                    <p>${basket[indexBasket].amount}</p>
+                    <p class="basket-x">x</p>
+                    <p>${basket[indexBasket].name}</p>
+                </div>
 
+                <div class="basket-amount-container">
+                    <button class="delete-menu-button" onclick="deleteMenu(${indexBasket})"></button>
+                    <p id="menuAmount" class="basket-amount">${basket[indexBasket].amount}</p>
+                    <button id="addAmount" onclick="addAmount(${indexBasket})" class="add-amount"></button>
+                    <p class="basket-menu-price">${dishes[indexBasket].price.toFixed(2).replace(".", ",") + "€"}</p>
+                </div>
+                
             </section>
             `
 

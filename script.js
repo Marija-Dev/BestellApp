@@ -28,9 +28,7 @@ function renderDishes() {
 }
 
 function addToBasket(indexDishes) {
-    let dishToBasket = dishes[indexDishes];
-    let basketMenu = document.getElementById("addedBasketMenu");
-    
+    let dishToBasket = dishes[indexDishes];    
     let found = basket.find(element => element.id === dishToBasket.id);
 
     menuToPush = {
@@ -58,4 +56,26 @@ function renderBasket() {
     for (let indexBasket = 0; indexBasket < basket.length; indexBasket++) {
         basketRef.innerHTML += getBasketTemplate(indexBasket);
     }
+}
+
+
+
+function deleteMenu(indexBasket) {
+    
+    basket.splice(indexBasket, 1);
+
+    renderBasket();
+}
+
+function addAmount(indexBasket) {
+    let amountToChange = document.getElementById("menuAmount");
+    // amountToChange.innerHTML = "";
+    
+    let amount = basket[indexBasket].amount;
+
+    amount++;
+
+    amountToChange.innerHTML = amount;
+
+    renderBasket();
 }
