@@ -42,6 +42,30 @@ header {
     align-items: center;
 }
 
+.menu-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 50px;    
+    font-size: 22px;
+    width: 450px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    border: solid transparent;
+    border-width: 0px 10px 0px 10px;
+
+}
+
+a:hover {
+    color: blueviolet;
+    background-color: rgb(221, 189, 252);
+    border-radius: 20px;
+}
+
 h1 {
     font-family: "Palanquin-Bold";
     font-size: 40px;
@@ -69,6 +93,7 @@ h3 {
     width: 100%;
     position: absolute;
     left: 0;
+    top: 850px;
 }
 
 .pizza-titles-fullwidth {
@@ -78,7 +103,7 @@ h3 {
 
     width: 100%;
     position: absolute;
-    top: 1650px;
+    top: 1710px;
     left: 0;
 }
 
@@ -89,7 +114,7 @@ h3 {
 
     width: 100%;
     position: absolute;
-    top: 2510px;
+    top: 2580px;
     left: 0;
 }
 
@@ -122,7 +147,7 @@ h3 {
 }
 
 .heading-text {
-    margin: 0;
+    margin: 0 0 50px 0;
     font-size: 25px;
     font-weight: bold;
 }
@@ -134,6 +159,7 @@ h3 {
     flex-direction: row;
     flex-grow: 1;
     gap: 2px;
+    
     /* background-color: rgb(201, 129, 45); */
 }
 
@@ -141,7 +167,8 @@ h3 {
     display: flex;
     flex-direction: column;
     width: 1000px;
-    
+    margin-top: 70px;
+
 }
 
 .menu-content {
@@ -208,7 +235,7 @@ h3 {
     background-image: url("./assets/icons/add-to-basket-hover.svg");
     height: 30px;
     width: 115px;
-    
+
 }
 
 footer {
