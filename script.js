@@ -44,8 +44,6 @@ function addToBasket(indexDishes) {
 
     if (found) {
         found.amount++;
-        // found.price * found.amount;
-
     } else {
         basket.push(menuToPush);
     }
