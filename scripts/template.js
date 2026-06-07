@@ -1,4 +1,4 @@
-function getBurgerTemplate(indexDishes) {
+function getBurgerTemplate(indexDishes, indexBasket) {
     return `<section class="single-menu-card">
                     <img class="single-menu-img" src="${dishes[indexDishes].imgPath}" alt="">
 
@@ -73,13 +73,17 @@ function getBasketTemplate(indexBasket) {
 
                 <div class="basket-amount-container">
                     <button id="removeAmount" onclick="changeAmount(${indexBasket})" class="remove-amount"></button>
-                    <p id="menuAmount" class="basket-amount">${basket[indexBasket].amount}</p>
-                    <button id="addAmount" onclick="changeAmount(${indexBasket})" class="add-amount"></button>
-                    <p id="price" class="basket-menu-price">${dishes[indexBasket].price.toFixed(2).replace(".", ",") + "€"}</p>
+
+                    <p id="menuAmount-${indexBasket}" class="basket-amount">${basket[indexBasket].amount}</p>
+
+                    <button id="addAmount-${indexBasket}" onclick="changeAmount(${indexBasket})" class="add-amount"></button>
+
+                    <p id="price-${indexBasket}" class="basket-menu-price">${(basket[indexBasket].price * basket[indexBasket].amount).toFixed(2).replace(".", ",") + "€"}</p>
                 </div>
                 
             </section>
             `
 
 }
+
 

@@ -1,5 +1,5 @@
 .basket-container {
-    width: 200px;
+    width: 400px;
     flex-grow: 1;
     padding: 0 0 16px 16px;
 }
@@ -36,9 +36,11 @@ h5 {
     color: rgb(221, 189, 252);
 }
 
+/* filter verändert die farbe vom shopping-cart.svg */
 .shopping-cart-img {
     width: 150px;
-    filter: brightness(0) saturate(100%) invert(82%) sepia(21%) saturate(1455%) hue-rotate(200deg) brightness(90%) contrast(102%);;
+    filter: brightness(0) saturate(100%) invert(82%) sepia(21%) saturate(1455%) hue-rotate(200deg) brightness(90%) contrast(102%);
+    ;
 }
 
 .single-menu-container {

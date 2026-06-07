@@ -55,7 +55,7 @@ a {
     text-decoration: none;
     color: black;
     font-weight: bold;
-    border: solid transparent;
+    border: solid transparent; /* sorgt dafür dass beim hovern content nicht verschoben wird */
     border-width: 0px 10px 0px 10px;
 
 }

@@ -1,6 +1,7 @@
 function init() {
     renderDishes();
     renderBasket();
+    // renderPrice();
 }
 
 //fügt die dishes je nach kategorie in zugehörigen html container
@@ -43,6 +44,8 @@ function addToBasket(indexDishes) {
 
     if (found) {
         found.amount++;
+        // found.price * found.amount;
+
     } else {
         basket.push(menuToPush);
     }
@@ -50,6 +53,8 @@ function addToBasket(indexDishes) {
     renderBasket();
 }
 
+//lädt basket inhalt, wenn nichts im basket, nachricht -> nothing in here..
+//rechnet direkt im template menge mal preis aus und zeigt es im html an
 function renderBasket(indexBasket) {
     basketRef = document.getElementById("addedBasketMenu");
     basketRef.innerHTML = "";
@@ -67,6 +72,7 @@ function renderBasket(indexBasket) {
     }
 }
 
+//löscht basket inhalt -> einzelnes menü
 function deleteMenu(indexBasket) {
     basket.splice(indexBasket, 1);
 
@@ -74,20 +80,20 @@ function deleteMenu(indexBasket) {
 }
 
 //prüft per id welcher button geklickt wurde, und fügt entweder 1 hinzu oder zieht 1 ab
+//
 function changeAmount(indexBasket) {
     let basketDishes = basket[indexBasket];
-    let amountToChange = document.getElementById("menuAmount");
+    let amountToChange = document.getElementById(`menuAmount-${indexBasket}`);
     let clickedButton = event.target.id;
-    let price = document.getElementById("price");
-    let amount = basket[indexBasket].amount;
 
-    if (clickedButton === "addAmount") {
+    if (clickedButton === `addAmount-${indexBasket}`) {
         amountToChange.innerHTML = basketDishes.amount++;
-        price.innerHTML = basketDishes.price * amount;
+
     } else if (clickedButton === "removeAmount" && basketDishes.amount > 1) {
         amountToChange.innerHTML = basketDishes.amount--;
     }
 
     renderBasket();
 }
+
 
