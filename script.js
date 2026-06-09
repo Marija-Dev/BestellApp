@@ -1,3 +1,5 @@
+let dialog = document.getElementById("myDialog");
+
 function init() {
     renderDishes();
     renderBasket();
@@ -126,16 +128,34 @@ function buyNow() {
     let delivery = 4.99;
 
     buyNowPrice.innerHTML = "(" + (subTotalSum + delivery).toFixed(2).replace(".", ",") + "€" + ")";
+
+
+    
+
 }
 
 function openDialog() {
-    let dialog = document.getElementById("myDialog");
+    
 
     dialog.innerHTML = getOrderedTemplate();
 
     dialog.showModal();
-    dialog.classList.add("opened")
+    dialog.classList.add("opened");
 
+
+
+
+    let basketRef = document.getElementById("myBasket");
+
+    let clickedButton = event.target.id;
+
+    if (clickedButton === "buyNowButton") {
+        basketRef.classList.add("remove-basket")
+    }
+}
+function closeDialog() {
+    dialog.close();
+    dialog.classList.remove("opened");
 }
 
 

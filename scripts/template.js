@@ -116,6 +116,7 @@ function getSubTotalTemplate(index) {
 
 function getOrderedTemplate() {
     return ` <section class="ordered-container"> 
+                <p onclick="closeDialog()" class="close-dialog-btn">x</p>
                 <img class="car-image" src="./assets/icons/delivery-car.png" alt="">
                 <p class="order-confirmed">Order confirmed!</p>
                 <p class="food-on-way">Your food in on the way!</p>
