@@ -104,7 +104,7 @@ let  dishes = [
         "name": "Vegan green salad with tofu",
         "price": 14.90,
         "ingredients": "Green salad, Cherry tomatoes, Cucumber, Baby spinach, Edamame, Radishes, Bittercress, Tofu, Peanuts",
-        "imgPath": "../assets/img/salad4.jpg"
+        "imgPath": "./assets/img/salad4.jpg"
     }
 ];
 

@@ -78,7 +78,6 @@ function deleteMenu(indexBasket) {
 }
 
 //prüft per id welcher button geklickt wurde, und fügt entweder 1 hinzu oder zieht 1 ab
-//
 function changeAmount(indexBasket) {
     let basketDishes = basket[indexBasket];
     let amountToChange = document.getElementById(`menuAmount-${indexBasket}`);
@@ -92,6 +91,51 @@ function changeAmount(indexBasket) {
     }
 
     renderBasket();
+}
+
+
+
+
+
+
+function subTotal() {
+    let checkOutCon = document.getElementById("checkOutContainer");
+    checkOutCon.innerHTML = "";
+    checkOutCon.innerHTML = getSubTotalTemplate();
+
+    let subTotal = document.getElementById("subTotal");
+    let deliveryFee = document.getElementById("deliveryFee");
+    let delivery = 4.99;
+    let total = document.getElementById("total");
+    let subTotalSum = basket.reduce((sum, dish) => sum + dish.price * dish.amount, 0);
+
+    subTotal.innerHTML = subTotalSum.toFixed(2).replace(".", ",") + "€";
+    deliveryFee.innerHTML = delivery.toFixed(2).replace(".", ",") + "€";
+    total.innerHTML = (subTotalSum + delivery).toFixed(2).replace(".", ",") + "€";
+
+    if (basket.length === 0) {
+        checkOutCon.innerHTML = "";
+    }
+
+    renderBasket();
+}
+
+function buyNow() {
+    let buyNowPrice = document.getElementById("buyNowPrice");
+    let subTotalSum = basket.reduce((sum, dish) => sum + dish.price * dish.amount, 0);
+    let delivery = 4.99;
+
+    buyNowPrice.innerHTML = "(" + (subTotalSum + delivery).toFixed(2).replace(".", ",") + "€" + ")";
+}
+
+function openDialog() {
+    let dialog = document.getElementById("myDialog");
+
+    dialog.innerHTML = getOrderedTemplate();
+
+    dialog.showModal();
+    dialog.classList.add("opened")
+
 }
 
 
