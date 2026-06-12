@@ -130,29 +130,27 @@ function buyNow() {
     buyNowPrice.innerHTML = "(" + (subTotalSum + delivery).toFixed(2).replace(".", ",") + "€" + ")";
 
 
-    
+
 
 }
 
 function openDialog() {
-    
-
     dialog.innerHTML = getOrderedTemplate();
-
     dialog.showModal();
     dialog.classList.add("opened");
 
-
-
-
     let basketRef = document.getElementById("myBasket");
+    let clickedButton = event.target.id; //gibt die id des angeklickten button aus
 
-    let clickedButton = event.target.id;
+    if (clickedButton === "buyNowButton") { //vergleicht angeklickte id mit: "buyNowButton", ...
+        basketRef.classList.add("remove-basket"); //... wenn ja, entfernt basket
 
-    if (clickedButton === "buyNowButton") {
-        basketRef.classList.add("remove-basket")
+        setTimeout(() => {
+            setTimeout(closeDialog, 5000); //führt closeDialog funktion nach 5000 ms aus
+        });
     }
 }
+
 function closeDialog() {
     dialog.close();
     dialog.classList.remove("opened");

@@ -247,7 +247,7 @@ dialog::backdrop {
     opacity: 1;
     transition: all 1s ease-in;
     background-color: rgba(30, 29, 29, 0.432);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(20px);
 }
 
 .ordered-container {
