@@ -42,11 +42,15 @@ header {
     align-items: center;
 }
 
+.heading {
+    display: flex;
+}
+
 .menu-links {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    height: 50px;    
+    height: 50px;
     font-size: 22px;
     width: 450px;
 }
@@ -55,7 +59,8 @@ a {
     text-decoration: none;
     color: black;
     font-weight: bold;
-    border: solid transparent; /* sorgt dafür dass beim hovern content nicht verschoben wird */
+    border: solid transparent;
+    /* sorgt dafür dass beim hovern content nicht verschoben wird */
     border-width: 0px 10px 0px 10px;
 
 }
@@ -159,7 +164,7 @@ h3 {
     flex-direction: row;
     flex-grow: 1;
     gap: 2px;
-    
+
     /* background-color: rgb(201, 129, 45); */
 }
 
@@ -196,19 +201,32 @@ h3 {
 .name-price-con {
     display: flex;
     flex-direction: row;
+    
+
 }
 
 .meal-name {
     font-size: 24px;
     margin: 0;
+    width: 330px;
 }
+
+/* .price-container {
+    position: relative;
+    right: 20px;
+    height: 50px;
+    width: 70px;
+} */
 
 .price {
     font-size: 24px;
     font-weight: bold;
     margin-top: 0;
     position: absolute;
-    right: 40px;
+    right: 20px;
+    top: 20px;
+    height: 50px;
+    width: 70px;
 }
 
 .ingredients {
@@ -244,4 +262,232 @@ footer {
     display: flex;
     justify-content: center;
     gap: 80px;
+}
+
+
+
+
+
+
+/* Responsive */
+
+@media (max-width: 1000px) {
+    .basket-container {
+        display: none;
+    }
+
+    .basket {
+        display: none;
+    }
+
+    .basket-mobile-container {
+        display: flex;
+        justify-content: center;
+        gap: 60px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 70px;
+        background-color: rgb(32, 33, 32);
+    }
+
+    .basket-mobile {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 800px;
+    }
+
+    .menu-content {
+        padding-top: 110px;
+    }
+
+    .pizza-titles-fullwidth {
+        top: 2340px;
+    }
+
+    .salad-titles-fullwidth {
+        top: 3790px;
+    }
+}
+
+@media (max-width: 850px) {
+    .single-menu-card {
+        flex-direction: column;
+        width: 500px;
+        height: 280px;
+        padding: 20px;
+        margin-left: 20px;
+    }
+
+    .single-menu-img {
+        object-fit: cover;
+        object-position: 100%;
+    }
+
+
+
+    .price {
+        position: absolute;
+        top: 265px;
+        left: 20px;
+    }
+
+   
+
+    .ingredients {
+        width: 500px;
+        height: auto;
+        padding-bottom: 50px;
+    }
+
+    .category-titles-content {
+        flex-direction: column;
+    }
+
+    .burger-icon {
+        margin-top: -55px;
+        margin-left: 0;
+        height: 70px;
+        width: 70px;
+    }
+
+    .burger-headline {
+        margin: -5px;
+        font-size: 0;
+
+    }
+
+    .burger-headline::after {
+        content: "Burger";
+        font-size: 24px;
+    }
+
+    .pizza-icon {
+        margin-top: -40px;
+        margin-left: 0;
+        height: 70px;
+        width: 70px;
+    }
+
+    .pizza-headline {
+        margin: -20px;
+    }
+
+    .salad-icon {
+        margin-top: -50px;
+        margin-left: 0;
+        height: 70px;
+        width: 70px;
+    }
+
+    .salad-headline {
+        margin: -20px;
+    }
+
+}
+
+@media (max-width: 700px) {
+    .heading-text {
+        display: flex;
+        text-align: center;
+        width: 350px;
+        font-size: 18px;
+
+    }
+}
+
+@media (max-width: 650px) {
+    .menu-content {
+        margin: 0;
+        padding: 110px 0 0 0;
+    }
+
+    .single-menu-card {
+        display: flex;
+        flex-direction: column;
+        /* width: 320px; */
+        /* height: auto; */
+
+
+        
+
+    }
+
+    .ingredients {
+   
+        width: 450px;
+    }
+
+    /* .price {
+        display: flex;
+        position: absolute;
+        left: 20px;
+        bottom: -15px;
+        margin-top: auto;  /*schiebt container automatisch unter den darüberliegenden*/
+    /* } */ 
+
+
+
+
+}
+
+@media (max-width: 600px) {
+    .menu-links {
+        justify-content: center;
+    }
+
+
+}
+
+
+
+@media (max-width: 500px) {
+    .burger-logo {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 20px;
+    }
+
+    .heading-container {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    h2 {
+        font-size: 30px;
+    }
+
+    .heading-text {
+        width: 250px;
+    }
+
+    .single-menu-card {
+        display: flex;
+        flex-direction: column;
+        width: 230px;
+        height: auto;
+    }
+
+    .ingredients {
+   
+        height: auto;
+        padding-bottom: 50px;
+    }
+
+   
+
+    .price {
+        display: flex;
+        position: absolute;
+        left: 20px;
+        bottom: -15px;
+        margin-top: auto;  /*schiebt container automatisch unter den darüberliegenden*/
+       
+    }
 }

@@ -5,9 +5,13 @@ function getBurgerTemplate(indexDishes, indexBasket) {
                     <div class="single-meal-description">
                         <div class="name-price-con">
                             <h4 class="meal-name">${dishes[indexDishes].name}</h4>
+
+                        </div>
+                           
+                        <div class="price-container"> 
                             <p class="price">${dishes[indexDishes].price.toFixed(2).replace(".", ",") + "€"}</p>
                         </div>
-
+                            
                         <div>
                             <p class="ingredients">${dishes[indexDishes].ingredients}</p>
                         </div>

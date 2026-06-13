@@ -15,6 +15,14 @@
     border-radius: 20px 0 0 20px;
 }
 
+.basket-mobile {
+    display: none;
+}
+
+.basket-mobile-img {
+    height: 40px;
+}
+
 h5 {
     display: flex;
     justify-content: center;
@@ -287,3 +295,4 @@ dialog::backdrop {
     font-weight: bold;
     cursor: pointer;
 }
+

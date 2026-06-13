@@ -124,14 +124,10 @@ function subTotal() {
 
 function buyNow() {
     let buyNowPrice = document.getElementById("buyNowPrice");
-    let subTotalSum = basket.reduce((sum, dish) => sum + dish.price * dish.amount, 0);
+    let subTotalSum = basket.reduce((sum, dish) => sum + dish.price * dish.amount, 0); //rechnet gesamtsumme im basket aus
     let delivery = 4.99;
 
     buyNowPrice.innerHTML = "(" + (subTotalSum + delivery).toFixed(2).replace(".", ",") + "€" + ")";
-
-
-
-
 }
 
 function openDialog() {
