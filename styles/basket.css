@@ -21,6 +21,7 @@
 
 .basket-mobile-img {
     height: 40px;
+    /* image-rendering: pix; */
 }
 
 h5 {
@@ -48,7 +49,7 @@ h5 {
 .shopping-cart-img {
     width: 150px;
     filter: brightness(0) saturate(100%) invert(82%) sepia(21%) saturate(1455%) hue-rotate(200deg) brightness(90%) contrast(102%);
-    ;
+    
 }
 
 .single-menu-container {

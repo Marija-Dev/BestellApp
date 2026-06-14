@@ -177,6 +177,12 @@ h3 {
 }
 
 .menu-content {
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+
+
+
     width: calc(100% - 100px);
     padding: 80px 16px 16px 16px;
 }
@@ -195,13 +201,15 @@ h3 {
 
 .single-menu-img {
     height: 120px;
+    width: 205px;
     border-radius: 15px;
+    /* object-fit: unset; */
 }
 
 .name-price-con {
     display: flex;
     flex-direction: row;
-    
+
 
 }
 
@@ -304,15 +312,29 @@ footer {
     }
 
     .pizza-titles-fullwidth {
-        top: 2340px;
+        top: 1770px;
+    }
+
+    .salad-titles-fullwidth {
+        top: 2660px;
+    }
+
+    footer {
+        margin-bottom: 70px;
+    }
+}
+
+
+
+@media (max-width: 850px) {
+    .pizza-titles-fullwidth {
+        top: 2330px;
     }
 
     .salad-titles-fullwidth {
         top: 3790px;
     }
-}
 
-@media (max-width: 850px) {
     .single-menu-card {
         flex-direction: column;
         width: 500px;
@@ -324,6 +346,10 @@ footer {
     .single-menu-img {
         object-fit: cover;
         object-position: 100%;
+        width: auto;
+        
+
+        /* image-rendering: initial; */
     }
 
 
@@ -334,7 +360,7 @@ footer {
         left: 20px;
     }
 
-   
+
 
     .ingredients {
         width: 500px;
@@ -401,49 +427,60 @@ footer {
 @media (max-width: 650px) {
     .menu-content {
         margin: 0;
-        padding: 110px 0 0 0;
-    }
-
-    .single-menu-card {
+        padding: 110px 0 0 30px;
         display: flex;
         flex-direction: column;
+        align-items: center;
+    }
+
+    .pizza-titles-fullwidth {
+        top: 2350px;
+    }
+
+    .salad-titles-fullwidth {
+        top: 3830px;
+    }
+
+    /* .single-menu-card {
+        display: flex;
+        flex-direction: column;
+
+        margin-left: 20px;
         /* width: 320px; */
         /* height: auto; */
 
-
-        
-
-    }
+    /* } */ 
 
     .ingredients {
-   
+
         width: 450px;
     }
 
-    /* .price {
-        display: flex;
-        position: absolute;
-        left: 20px;
-        bottom: -15px;
-        margin-top: auto;  /*schiebt container automatisch unter den darüberliegenden*/
-    /* } */ 
-
+    
 
 
 
 }
 
-@media (max-width: 600px) {
+
+
+
+
+@media (max-width: 630px) {
     .menu-links {
         justify-content: center;
+        width: 300px;
     }
 
+    .pizza-titles-fullwidth {
+        top: 2400px;
+    }
 
-}
+    .salad-titles-fullwidth {
+        top: 3900px;
+        /* margin-bottom: 20px; */
+    }
 
-
-
-@media (max-width: 500px) {
     .burger-logo {
         width: 150px;
         height: 150px;
@@ -475,19 +512,65 @@ footer {
     }
 
     .ingredients {
-   
+        width: 230px;
         height: auto;
         padding-bottom: 50px;
     }
-
-   
 
     .price {
         display: flex;
         position: absolute;
         left: 20px;
         bottom: -15px;
-        margin-top: auto;  /*schiebt container automatisch unter den darüberliegenden*/
-       
+        margin-top: auto;
+        /*schiebt container automatisch unter den darüberliegenden*/
+
+    }
+
+    footer {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .footer {
+        margin: 0;
+
+    }
+
+    .basket-mobile {
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .basket-mobile-img {
+        height: 35px;
+        
+    }
+
+}
+
+@media (max-width: 480px) {
+    .single-menu-card {
+        margin-left: 50px;
+    }
+}
+
+@media (max-width: 380px) {
+    .menu-container {
+        width: auto;
+    }
+
+    .menu-content {
+        width: 300px;
+        /* margin-left: 10px; */
+        padding-left: 0px;
+    }
+
+    .single-menu-card {
+        width: 220px;
+        margin-left: 20px;
+        /* margin-left: 10px; */
+        /* padding-right: 0; */
     }
 }

@@ -1,6 +1,6 @@
 function getBurgerTemplate(indexDishes, indexBasket) {
     return `<section class="single-menu-card">
-                    <img class="single-menu-img" src="${dishes[indexDishes].imgPath}" alt="">
+                    <img class="single-menu-img" src="${dishes[indexDishes].imgPath}" alt="${dishes[indexDishes].alt}">
 
                     <div class="single-meal-description">
                         <div class="name-price-con">
@@ -23,7 +23,7 @@ function getBurgerTemplate(indexDishes, indexBasket) {
 
 function getPizzaTemplate(indexDishes, indexBasket) {
     return `<section class="single-menu-card">
-                    <img class="single-menu-img" src="${dishes[indexDishes].imgPath}" alt="">
+                    <img class="single-menu-img" src="${dishes[indexDishes].imgPath}" alt="${dishes[indexDishes].alt}">
 
                     <div class="single-meal-description">
                         <div class="name-price-con">
@@ -44,7 +44,7 @@ function getPizzaTemplate(indexDishes, indexBasket) {
 
 function getSaladTemplate(indexDishes, indexBasket) {
     return `<section class="single-menu-card">
-                    <img class="single-menu-img" src="${dishes[indexDishes].imgPath}" alt="">
+                    <img class="single-menu-img" src="${dishes[indexDishes].imgPath}" alt="${dishes[indexDishes].alt}">
 
                     <div class="single-meal-description">
                         <div class="name-price-con">

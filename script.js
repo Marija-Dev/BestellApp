@@ -152,4 +152,8 @@ function closeDialog() {
     dialog.classList.remove("opened");
 }
 
+function toggleMobileBasket() {
+    
+}
+
 
