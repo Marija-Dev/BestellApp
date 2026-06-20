@@ -89,7 +89,17 @@ function getBasketTemplate(indexBasket) {
             `
 }
 
-function getSubTotalTemplate(index) {
+function getEmptyBasketNoteTemplate() {
+    return `<div class="empty-basket-note">
+                Nothing here yet. <br>
+                Go ahead and choose something delicious!
+
+                <img class="shopping-cart-img" src="./assets/icons/shopping-cart.svg" alt="Shopping-Cart">
+            </div>
+           `
+}
+
+function getSubTotalTemplate() {
     return `<section class="check-out-container">
                 <div class="sub-total-container">
                     <h6>Subtotal</h6>
@@ -109,7 +119,7 @@ function getSubTotalTemplate(index) {
                 </div>
 
                 <div>
-                    <button onclick="openDialog()" id="buyNowButton" class="buy-now-button">Buy now
+                    <button onclick="openOrderedDialog()" id="buyNowButton" class="buy-now-button">Buy now
                         <p id="buyNowPrice"></p>
                     </button>
                 </div>
@@ -120,7 +130,7 @@ function getSubTotalTemplate(index) {
 
 function getOrderedTemplate() {
     return ` <section class="ordered-container"> 
-                <p onclick="closeDialog()" class="close-dialog-btn">x</p>
+                <p onclick="closeOrderedDialog()" class="close-dialog-btn">x</p>
                 <img class="car-image" src="./assets/icons/delivery-car.png" alt="">
                 <p class="order-confirmed">Order confirmed!</p>
                 <p class="food-on-way">Your food in on the way!</p>
@@ -128,6 +138,7 @@ function getOrderedTemplate() {
     
            `
 }
+
 
 
 

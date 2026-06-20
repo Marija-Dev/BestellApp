@@ -1,9 +1,10 @@
-let dialog = document.getElementById("myDialog");
+let orderedDialog = document.getElementById("myOrderedDialog");
+let mobileBasketDialog = document.getElementById("mobileBasketDialogID");
 
 function init() {
     renderDishes();
     renderBasket();
-    // renderPrice();
+    renderMobileBasket();
 }
 
 //fügt die dishes je nach kategorie in zugehörigen html container
@@ -51,10 +52,11 @@ function addToBasket(indexDishes) {
     }
 
     renderBasket();
+    renderMobileBasket();
 }
 
 //lädt basket inhalt, wenn nichts im basket, nachricht -> nothing in here..
-//rechnet direkt im template menge mal preis aus und zeigt es im html an
+//rechnet direkt im getBasketTemplate menge mal preis aus und zeigt es im html an
 function renderBasket(indexBasket) {
     basketRef = document.getElementById("addedBasketMenu");
     basketRef.innerHTML = "";
@@ -64,11 +66,7 @@ function renderBasket(indexBasket) {
     }
 
     if (basket.length === 0) {
-        basketRef.innerHTML = `<div class="empty-basket-note"> Nothing here yet. <br>
-                                    Go ahead and choose something delicious!
-                                    <img class="shopping-cart-img" src="./assets/icons/shopping-cart.svg" alt="Shopping-Cart">
-                               </div>
-                              `
+        basketRef.innerHTML = getEmptyBasketNoteTemplate();
     }
 }
 
@@ -77,6 +75,7 @@ function deleteMenu(indexBasket) {
     basket.splice(indexBasket, 1);
 
     renderBasket();
+    renderMobileBasket();
 }
 
 //prüft per id welcher button geklickt wurde, und fügt entweder 1 hinzu oder zieht 1 ab
@@ -93,6 +92,7 @@ function changeAmount(indexBasket) {
     }
 
     renderBasket();
+    renderMobileBasket();
 }
 
 
@@ -120,6 +120,7 @@ function subTotal() {
     }
 
     renderBasket();
+    renderMobileBasket();
 }
 
 function buyNow() {
@@ -128,32 +129,87 @@ function buyNow() {
     let delivery = 4.99;
 
     buyNowPrice.innerHTML = "(" + (subTotalSum + delivery).toFixed(2).replace(".", ",") + "€" + ")";
+
 }
 
-function openDialog() {
-    dialog.innerHTML = getOrderedTemplate();
-    dialog.showModal();
-    dialog.classList.add("opened");
+function openOrderedDialog() {
+    orderedDialog.innerHTML = getOrderedTemplate();
+    orderedDialog.showModal();
+    orderedDialog.classList.add("opened");
 
     let basketRef = document.getElementById("myBasket");
     let clickedButton = event.target.id; //gibt die id des angeklickten button aus
 
     if (clickedButton === "buyNowButton") { //vergleicht angeklickte id mit: "buyNowButton", ...
-        basketRef.classList.add("remove-basket"); //... wenn ja, entfernt basket
+        basketRef.classList.add("remove-basket"); //... wenn ja, entfernt basket nach klick auf bestellbutton
 
         setTimeout(() => {
-            setTimeout(closeDialog, 5000); //führt closeDialog funktion nach 5000 ms aus
+            setTimeout(closeOrderedDialog, 5000); //führt closeOrderedDialog funktion nach 5000 ms aus
         });
     }
 }
 
-function closeDialog() {
-    dialog.close();
-    dialog.classList.remove("opened");
+function closeOrderedDialog() {
+    orderedDialog.close();
+    orderedDialog.classList.remove("opened");
 }
 
-function toggleMobileBasket() {
+
+
+
+function toggleMobileBasketDialog() {
+    let basketMobileContent = document.getElementById("mobileBasketContent");
+
+    if (mobileBasketDialog.open) {
+        mobileBasketDialog.close();
+    } else {
+        basketMobileContent.innerHTML += `<h5>Your Basket</h5>`;
+        // mobileBasketDialog.innerHTML += getEmptyBasketNoteTemplate();
+        mobileBasketDialog.show();
+    }
+
+    mobileBasketDialog.classList.toggle("open");
+    renderMobileBasket();
+
+    
+
+}
+
+function renderMobileBasket() {
+    let basketMobileRef = document.getElementById("mobileBasketContent");
+    let mobileCheckOut = document.getElementById("mobileCheckOutContainer");
+
+    basketMobileRef.innerHTML = `<h5>Your Basket</h5>`;
+
+    for (let indexBasket = 0; indexBasket < basket.length; indexBasket++) {
+        basketMobileRef.innerHTML += getBasketTemplate(indexBasket);
+
+    }
+
+
+    if (basket.length === 0) {
+        basketMobileRef.innerHTML = getEmptyBasketNoteTemplate();
+    }
+    
+    if (basket.length !== 0) {
+        mobileCheckOut.innerHTML = getSubTotalTemplate();
+    } else {
+        mobileCheckOut.innerHTML = "";
+    }
+
+
+
     
 }
+
+
+
+
+
+
+
+
+
+
 
 

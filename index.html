@@ -8,7 +8,7 @@
 
     <script src="./scripts/db.js"></script>
     <script src="./scripts/template.js"></script>
-    <script src="./script.js" defer></script>
+
 
     <link rel="stylesheet" href="./styles/assets.css">
     <link rel="stylesheet" href="./styles/basket.css">
@@ -90,7 +90,6 @@
                 <div id="allSalad" class="menu-content">
 
                 </div>
-
             </section>
 
             <section class="basket-container">
@@ -107,22 +106,35 @@
             </section>
 
             <section class="basket-mobile-container">
-                <div class="basket-mobile">
+                <div class="basket-mobile-nav-bar">
                     <a href="index.html"><img class="basket-mobile-img" src="./assets/icons/nav-home.svg" alt="Home">
                     </a>
 
                     <img class="basket-mobile-img" src="./assets/icons/nav-profile.svg" alt="Profile">
                     <img class="basket-mobile-img" src="./assets/icons/nav-logo.svg" alt="Logo">
-                    <button onclick="toggleMobileBasket()">
+
+                    <button class="basket-mobile-button" onclick="toggleMobileBasketDialog()">
                         <img class="basket-mobile-img" src="./assets/icons/nav-cart.svg" alt="Cart">
                     </button>
-
-
                 </div>
             </section>
         </article>
 
-        <dialog id="myDialog">
+
+
+        <dialog class="mobile-basket-dialog" id="mobileBasketDialogID">
+            <div id="mobileBasketContent">
+
+            </div>
+
+            <div id="mobileCheckOutContainer">
+
+            </div>
+
+        </dialog>
+
+
+        <dialog class="ordered-dialog" id="myOrderedDialog">
 
         </dialog>
     </main>
@@ -132,6 +144,10 @@
         <p class="footer">Imprint</p>
         <p class="footer">Cookie Preferences</p>
     </footer>
+
+
+    <script src="./script.js" defer></script>
 </body>
+
 
 </html>
