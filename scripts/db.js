@@ -122,3 +122,5 @@ let  dishes = [
 ];
 
 let basket = [];
+
+let delivery = 4.99;

@@ -1,4 +1,4 @@
-function getBurgerTemplate(indexDishes, indexBasket) {
+function getBurgerTemplate(indexDishes) {
     return `<section class="single-menu-card">
                     <img class="single-menu-img" src="${dishes[indexDishes].imgPath}" alt="${dishes[indexDishes].alt}">
 
@@ -17,7 +17,7 @@ function getBurgerTemplate(indexDishes, indexBasket) {
                         </div>
                     </div>
 
-                    <button onclick="addToBasket(${indexDishes}), subTotal(${indexBasket}), buyNow()" class="add-to-basket-button"></button>
+                    <button onclick="addToBasket(${indexDishes})" id="addToBasketButton-${indexDishes}" class="add-to-basket-button"></button>
             </section>`
 }
 
@@ -36,7 +36,7 @@ function getPizzaTemplate(indexDishes, indexBasket) {
                         </div>
                     </div>
 
-                    <button onclick="addToBasket(${indexDishes}), subTotal(${indexBasket}), buyNow()" class="add-to-basket-button"></button>
+                    <button onclick="addToBasket(${indexDishes})" id="addToBasketButton" class="add-to-basket-button">Add to basket</button>
 
             </section>
            `
@@ -57,7 +57,7 @@ function getSaladTemplate(indexDishes, indexBasket) {
                         </div>
                     </div>
 
-                    <button onclick="addToBasket(${indexDishes}), subTotal(${indexBasket}), buyNow()" class="add-to-basket-button"></button>
+                    <button onclick="addToBasket(${indexDishes})" id="addToBasketButton" class="add-to-basket-button">Add to basket</button>
             </section>
            `
 }
@@ -71,15 +71,15 @@ function getBasketTemplate(indexBasket) {
                     <p class="basket-menu-name">${basket[indexBasket].name}</p>
                     
                     <div class="delete-button-container">
-                        <button class="delete-menu-button" onclick="deleteMenu(${indexBasket}), subTotal(${indexBasket}), buyNow()"></button>
+                        <button class="delete-menu-button" onclick="deleteMenu(${indexBasket})"></button>
                     </div>
                 </div>
 
                 <div class="basket-amount-container">
                     <div class="change-amount-container">
-                        <button id="removeAmount" onclick="changeAmount(${indexBasket}), subTotal(${indexBasket}), buyNow()" class="remove-amount"></button>
+                        <button id="removeAmount" onclick="changeAmount(${indexBasket})" class="remove-amount"></button>
                         <p id="menuAmount-${indexBasket}" class="basket-amount">${basket[indexBasket].amount}</p>
-                        <button id="addAmount-${indexBasket}" onclick="changeAmount(${indexBasket}), subTotal(${indexBasket}), buyNow()" class="add-amount"></button>
+                        <button id="addAmount-${indexBasket}" onclick="changeAmount(${indexBasket})" class="add-amount"></button>
                     </div>
 
                     <p id="price-${indexBasket}" class="basket-menu-price">${(basket[indexBasket].price * basket[indexBasket].amount).toFixed(2).replace(".", ",") + "€"}</p>
@@ -120,11 +120,12 @@ function getSubTotalTemplate() {
 
                 <div>
                     <button onclick="openOrderedDialog()" id="buyNowButton" class="buy-now-button">Buy now
-                        <p id="buyNowPrice"></p>
+                        <p id="buyNowPrice" class="buy-now-price"></p>
                     </button>
                 </div>
             </section>
            `
+           
 }
 
 

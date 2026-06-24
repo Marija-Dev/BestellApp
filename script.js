@@ -4,7 +4,6 @@ let mobileBasketDialog = document.getElementById("mobileBasketDialogID");
 function init() {
     renderDishes();
     renderBasket();
-    renderMobileBasket();
 }
 
 //fügt die dishes je nach kategorie in zugehörigen html container
@@ -51,23 +50,57 @@ function addToBasket(indexDishes) {
         basket.push(menuToPush);
     }
 
+    changeAddToBasketButton();
     renderBasket();
-    renderMobileBasket();
+    calculatePrice();
+    buyNow();
+
 }
 
+
+function changeAddToBasketButton(indexDishes) {
+    let addToBasketButton = document.getElementById(`addToBasketButton-${indexDishes}`);
+    // let addToBasketButton = document.getElementById("addToBasketButton");
+    // let amountToChange = document.getElementById(`menuAmount-${indexBasket}`);
+
+    // addToBasketButton.innerHTML = "";
+    addToBasketButton.innerHTML = `Add to basket`;
+
+    // if (addToBasketButton) {
+    //     addToBasketButton.innerHTML = "Added " ;
+    // }
+
+    changeAmount();
+}
+
+
 //lädt basket inhalt, wenn nichts im basket, nachricht -> nothing in here..
-//rechnet direkt im getBasketTemplate menge mal preis aus und zeigt es im html an
-function renderBasket(indexBasket) {
-    basketRef = document.getElementById("addedBasketMenu");
+//rechnet direkt im getBasketTemplate menge mal preis aus und zeigt es im html an (vom einzelnen menü)
+function renderBasket() {
+    let basketRef = document.getElementById("addedBasketMenu");
+    let checkOutCon = document.getElementById("checkOutContainer");
+    let basketMobileRef = document.getElementById("mobileBasketContent");
+    let mobileCheckOut = document.getElementById("mobileCheckOutContainer");
+
     basketRef.innerHTML = "";
+    basketMobileRef.innerHTML = "";
 
     for (let indexBasket = 0; indexBasket < basket.length; indexBasket++) {
         basketRef.innerHTML += getBasketTemplate(indexBasket);
+        basketMobileRef.innerHTML += getBasketTemplate(indexBasket);
     }
 
     if (basket.length === 0) {
         basketRef.innerHTML = getEmptyBasketNoteTemplate();
+        checkOutCon.innerHTML = "";
+        basketMobileRef.innerHTML = getEmptyBasketNoteTemplate();
+        mobileCheckOut.innerHTML = "";
+    } else if (basket.length !== 0) {
+        checkOutCon.innerHTML = getSubTotalTemplate();
+        mobileCheckOut.innerHTML = getSubTotalTemplate();
     }
+
+    calculatePrice();
 }
 
 //löscht basket inhalt -> einzelnes menü
@@ -75,7 +108,7 @@ function deleteMenu(indexBasket) {
     basket.splice(indexBasket, 1);
 
     renderBasket();
-    renderMobileBasket();
+    buyNow();
 }
 
 //prüft per id welcher button geklickt wurde, und fügt entweder 1 hinzu oder zieht 1 ab
@@ -92,44 +125,36 @@ function changeAmount(indexBasket) {
     }
 
     renderBasket();
-    renderMobileBasket();
+    calculatePrice();
+    buyNow();
 }
 
-
-
-
-
-
-function subTotal() {
-    let checkOutCon = document.getElementById("checkOutContainer");
-    checkOutCon.innerHTML = "";
-    checkOutCon.innerHTML = getSubTotalTemplate();
-
-    let subTotal = document.getElementById("subTotal");
-    let deliveryFee = document.getElementById("deliveryFee");
-    let delivery = 4.99;
-    let total = document.getElementById("total");
+function calculatePrice() {
+    let subTotal = document.getElementsByClassName("sub-price");
+    let deliveryFee = document.getElementsByClassName("delivery-price");
+    let total = document.getElementsByClassName("total-price");
     let subTotalSum = basket.reduce((sum, dish) => sum + dish.price * dish.amount, 0);
 
-    subTotal.innerHTML = subTotalSum.toFixed(2).replace(".", ",") + "€";
-    deliveryFee.innerHTML = delivery.toFixed(2).replace(".", ",") + "€";
-    total.innerHTML = (subTotalSum + delivery).toFixed(2).replace(".", ",") + "€";
-
-    if (basket.length === 0) {
-        checkOutCon.innerHTML = "";
+    for (let i = 0; i < subTotal.length; i++) {
+        subTotal[i].innerHTML = subTotalSum.toFixed(2).replace(".", ",") + "€";
     }
 
-    renderBasket();
-    renderMobileBasket();
+    for (let i = 0; i < deliveryFee.length; i++) {
+        deliveryFee[i].innerHTML = delivery.toFixed(2).replace(".", ",") + "€";
+    }
+
+    for (let i = 0; i < total.length; i++) {
+        total[i].innerHTML = (subTotalSum + delivery).toFixed(2).replace(".", ",") + "€";
+    }
 }
 
 function buyNow() {
-    let buyNowPrice = document.getElementById("buyNowPrice");
+    let buyNowPrice = document.getElementsByClassName("buy-now-price");
     let subTotalSum = basket.reduce((sum, dish) => sum + dish.price * dish.amount, 0); //rechnet gesamtsumme im basket aus
-    let delivery = 4.99;
-
-    buyNowPrice.innerHTML = "(" + (subTotalSum + delivery).toFixed(2).replace(".", ",") + "€" + ")";
-
+    
+    for (let i = 0; i < buyNowPrice.length; i++) {
+        buyNowPrice[i].innerHTML = "(" + (subTotalSum + delivery).toFixed(2).replace(".", ",") + "€" + ")";
+    }
 }
 
 function openOrderedDialog() {
@@ -140,8 +165,9 @@ function openOrderedDialog() {
     let basketRef = document.getElementById("myBasket");
     let clickedButton = event.target.id; //gibt die id des angeklickten button aus
 
-    if (clickedButton === "buyNowButton") { //vergleicht angeklickte id mit: "buyNowButton", ...
+    if (clickedButton === "buyNowButton" || clickedButton === "buyNowPrice") { //vergleicht angeklickte id mit: "buyNowButton", ...
         basketRef.classList.add("remove-basket"); //... wenn ja, entfernt basket nach klick auf bestellbutton
+        mobileBasketDialog.classList.remove("open");
 
         setTimeout(() => {
             setTimeout(closeOrderedDialog, 5000); //führt closeOrderedDialog funktion nach 5000 ms aus
@@ -154,53 +180,18 @@ function closeOrderedDialog() {
     orderedDialog.classList.remove("opened");
 }
 
-
-
-
 function toggleMobileBasketDialog() {
     let basketMobileContent = document.getElementById("mobileBasketContent");
 
     if (mobileBasketDialog.open) {
         mobileBasketDialog.close();
     } else {
-        basketMobileContent.innerHTML += `<h5>Your Basket</h5>`;
-        // mobileBasketDialog.innerHTML += getEmptyBasketNoteTemplate();
         mobileBasketDialog.show();
     }
 
     mobileBasketDialog.classList.toggle("open");
-    renderMobileBasket();
-
-    
-
 }
 
-function renderMobileBasket() {
-    let basketMobileRef = document.getElementById("mobileBasketContent");
-    let mobileCheckOut = document.getElementById("mobileCheckOutContainer");
-
-    basketMobileRef.innerHTML = `<h5>Your Basket</h5>`;
-
-    for (let indexBasket = 0; indexBasket < basket.length; indexBasket++) {
-        basketMobileRef.innerHTML += getBasketTemplate(indexBasket);
-
-    }
-
-
-    if (basket.length === 0) {
-        basketMobileRef.innerHTML = getEmptyBasketNoteTemplate();
-    }
-    
-    if (basket.length !== 0) {
-        mobileCheckOut.innerHTML = getSubTotalTemplate();
-    } else {
-        mobileCheckOut.innerHTML = "";
-    }
-
-
-
-    
-}
 
 
 

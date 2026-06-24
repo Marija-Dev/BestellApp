@@ -244,24 +244,21 @@ h3 {
 }
 
 .add-to-basket-button {
-    background-image: url("./assets/icons/add-to-basket.svg");
+    color: black;
     height: 30px;
-    width: 115px;
+    width: 135px;
     border: 0;
     border-radius: 20px;
     position: absolute;
     right: 20px;
     bottom: 20px;
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: bold;
     cursor: pointer;
-
 }
 
 .add-to-basket-button:hover {
-    background-image: url("./assets/icons/add-to-basket-hover.svg");
-    height: 30px;
-    width: 115px;
-
+    color: blueviolet;
 }
 
 footer {
@@ -338,7 +335,7 @@ footer {
         display: block;
 
         width: 350px;
-        height: 500px;
+        height: 650px;
         background-color: rgb(32, 33, 32);
         color: white;
         position: fixed;
@@ -347,17 +344,24 @@ footer {
         border: none;
         border-radius: 20px 20px 20px 20px;
 
+        /* overflow: auto;
+        overflow-x: hidden; */
+    }
+
+    .mobile-basket-menu-container {
+        height: 320px;
+        width: 360px;
         overflow: auto;
         overflow-x: hidden;
     }
 
-    .mobile-basket-dialog::-webkit-scrollbar {
+    .mobile-basket-menu-container::-webkit-scrollbar {
         width: 10px;
         background-color: rgb(221, 189, 252);
         border-radius: 20px;
     }
 
-    .mobile-basket-dialog::-webkit-scrollbar-thumb {
+    .mobile-basket-menu-container::-webkit-scrollbar-thumb {
         background-color: blueviolet;
         border-radius: 20px;
     }
