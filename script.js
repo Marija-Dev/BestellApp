@@ -18,10 +18,10 @@ function renderDishes() {
 
     for (let indexDishes = 0; indexDishes < dishes.length; indexDishes++) {
         let dish = dishes[indexDishes];
-        
+
         if (dishes[indexDishes].category === "Burger & Sandwiches") {
-            
-            burgerRef.innerHTML += getBurgerTemplate(dish);  
+
+            burgerRef.innerHTML += getBurgerTemplate(dish);
         }
 
         if (dishes[indexDishes].category === "Pizza") {
@@ -39,21 +39,20 @@ function renderDishes() {
 
 //prüft ob sich bestimmtes menu in basket befindet, wenn ja wird anzahl erhöht, wenn nein wird hinzugefügt
 function addToBasket(id) {
+    let currentDish = dishes.find(dish => dish.id === id);
+    let existingDish = basket.find(element => element.id === currentDish.id);
 
-    let dishToBasket = dishes.find(dish => dish.id === id);
-    let found = basket.find(element => element.id === dishToBasket.id);
-
-    menuToBasket = {
-        id: dishToBasket.id,
-        name: dishToBasket.name,
-        price: dishToBasket.price,
+    let newDish = {
+        id: currentDish.id,
+        name: currentDish.name,
+        price: currentDish.price,
         amount: 1
     }
 
-    if (found) {
-        found.amount++;
+    if (existingDish) {
+        existingDish.amount++;
     } else {
-        basket.push(menuToBasket);
+        basket.push(newDish);
     }
 
 
@@ -61,6 +60,7 @@ function addToBasket(id) {
     calculatePrice();
     buyNow();
     changeAddToBasketButton(id);
+    showBadge();
 
 }
 
@@ -71,23 +71,29 @@ function addToBasket(id) {
 
 function changeAddToBasketButton(id) {
     let addToBasketButton = document.getElementById(`addToBasketButton-${id}`);
-    let found = basket.find(element => element.id === id);
+    let existingDish = basket.find(element => element.id === id);
 
-    
-
-    if (found) {
-        addToBasketButton.innerHTML = getAddToBasketBtnTemplate(found);
+    if (existingDish) {
+        addToBasketButton.innerHTML = getAddToBasketBtnTemplate(existingDish);
         addToBasketButton.classList.add("add-to-basket-color");
     } else {
         addToBasketButton.innerHTML = `Add to basket`;
+        addToBasketButton.classList.remove("add-to-basket-color");
     }
-    
 }
 
 
 // -----------TEST ENDE-----------
 
+function resetAllAddToBasketButtons() {
+    let allAddToBasketButtons = document.querySelectorAll(".add-to-basket-button");
 
+    for (let i = 0; i < allAddToBasketButtons.length; i++) {
+        allAddToBasketButtons[i].classList.remove("add-to-basket-color");
+
+        allAddToBasketButtons[i].innerHTML = `Add to basket`;
+    }
+}
 
 
 
@@ -104,8 +110,9 @@ function renderBasket() {
     basketMobileRef.innerHTML = "";
 
     for (let indexBasket = 0; indexBasket < basket.length; indexBasket++) {
-        basketRef.innerHTML += getBasketTemplate(indexBasket);
-        basketMobileRef.innerHTML += getBasketTemplate(indexBasket);
+        let basketDish = basket[indexBasket];
+        basketRef.innerHTML += getBasketTemplate(basketDish);
+        basketMobileRef.innerHTML += getBasketTemplate(basketDish);
     }
 
     if (basket.length === 0) {
@@ -122,39 +129,75 @@ function renderBasket() {
 }
 
 //löscht basket inhalt -> einzelnes menü
-function deleteMenu(indexBasket, indexDishes) {
+function deleteMenu(id) {
+    let indexBasket = basket.findIndex(dish => dish.id === id);
+
+    if (indexBasket === -1) {
+        return;
+    }
+
     basket.splice(indexBasket, 1);
 
     renderBasket();
     buyNow();
-    changeAddToBasketButton();
+    changeAddToBasketButton(id);
 }
 
 //prüft per id welcher button geklickt wurde, und fügt entweder 1 hinzu oder zieht 1 ab
-function changeAmount(indexBasket, id) {
-    let basketDishes = basket[indexBasket];
-    let amountToChange = document.getElementById(`menuAmount-${indexBasket}`);
-    let clickedButton = event.target.id;
+// function changeAmount(indexBasket, id) {
+//     let basketDishes = basket[indexBasket];
+//     let amountToChange = document.getElementById(`menuAmount-${indexBasket}`);
+//     let clickedButton = event.target.id;
+
+//     if (clickedButton === `addAmount-${indexBasket}`) {
+//         amountToChange.innerHTML = basketDishes.amount++;
+//     } else if (clickedButton === "removeAmount" && basketDishes.amount > 1) {
+//         amountToChange.innerHTML = basketDishes.amount--;
+//     }
+
+//     renderBasket();
+//     calculatePrice();
+//     buyNow();
+//     changeAddToBasketButton(id);
+// }
 
 
-    if (clickedButton === `addAmount-${indexBasket}`) {
+function increaseAmount(id) {
+    let currentDish = basket.find(dish => dish.id === id);
 
-        
-        amountToChange.innerHTML = basketDishes.amount++;
-
-       
-
-    } else if (clickedButton === "removeAmount" && basketDishes.amount > 1) {
-        amountToChange.innerHTML = basketDishes.amount--;
+    if (!currentDish) {
+        return;
     }
 
-
+    currentDish.amount++;
 
     renderBasket();
     calculatePrice();
     buyNow();
     changeAddToBasketButton(id);
 }
+
+function decreaseAmount(id) {
+    let currentDish = basket.find(dish => dish.id === id);
+
+    if (!currentDish) {
+        return;
+    }
+
+    if (currentDish.amount > 1) {
+        currentDish.amount--;
+    } else if (currentDish.amount <= 1) {
+        deleteMenu(id);
+    }
+
+    renderBasket();
+    calculatePrice();
+    buyNow();
+    changeAddToBasketButton(id);
+}
+
+
+
 
 function calculatePrice() {
     let subTotal = document.getElementsByClassName("sub-price");
@@ -190,16 +233,22 @@ function openOrderedDialog() {
     orderedDialog.classList.add("opened");
 
     let basketRef = document.getElementById("myBasket");
+    let mobileBasketRef = document.getElementById("mobileBasketContent");
+    let mobileCheckOutContainer = document.getElementById("mobileCheckOutContainer");
     let clickedButton = event.target.id; //gibt die id des angeklickten button aus
 
     if (clickedButton === "buyNowButton" || clickedButton === "buyNowPrice") { //vergleicht angeklickte id mit: "buyNowButton", ...
         basketRef.classList.add("remove-basket"); //... wenn ja, entfernt basket nach klick auf bestellbutton
         mobileBasketDialog.classList.remove("open");
+        mobileBasketRef.innerHTML = getEmptyBasketNoteTemplate();
+        mobileCheckOutContainer.innerHTML = "";
 
         setTimeout(() => {
             setTimeout(closeOrderedDialog, 5000); //führt closeOrderedDialog funktion nach 5000 ms aus
         });
     }
+
+    resetAllAddToBasketButtons();
 }
 
 function closeOrderedDialog() {
@@ -217,4 +266,15 @@ function toggleMobileBasketDialog() {
     }
 
     mobileBasketDialog.classList.toggle("open");
+}
+
+
+function showBadge() {
+    let badge = document.getElementById("badge");
+    let mobileBasket = document.getElementById("mobileBasketContent");
+    
+
+    if (mobileBasket === "") {
+        badge.classList.add("badge-hide");
+    }
 }

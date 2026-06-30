@@ -63,26 +63,26 @@ function getSaladTemplate(indexDishes) {
 }
 
 
-function getBasketTemplate(indexBasket) {
+function getBasketTemplate(dish) {
     return `<section class="basket-menu-card">
                 <div class="basket-name-container">
-                    <p class="basket-amount">${basket[indexBasket].amount}</p>
+                    <p class="basket-amount">${dish.amount}</p>
                     <p class="basket-x">x</p>
-                    <p class="basket-menu-name">${basket[indexBasket].name}</p>
+                    <p class="basket-menu-name">${dish.name}</p>
                     
                     <div class="delete-button-container">
-                        <button class="delete-menu-button" onclick="deleteMenu(${indexBasket})"></button>
+                        <button class="delete-menu-button" onclick="deleteMenu(${dish.id})"></button>
                     </div>
                 </div>
 
                 <div class="basket-amount-container">
                     <div class="change-amount-container">
-                        <button id="removeAmount" onclick="changeAmount(${indexBasket})" class="remove-amount"></button>
-                        <p id="menuAmount-${indexBasket}" class="basket-amount">${basket[indexBasket].amount}</p>
-                        <button id="addAmount-${indexBasket}" onclick="changeAmount(${indexBasket})" class="add-amount"></button>
+                        <button id="removeAmount" onclick="decreaseAmount(${dish.id})" class="remove-amount"></button>
+                        <p id="menuAmount-${dish.id}" class="basket-amount">${dish.amount}</p>
+                        <button id="addAmount-${dish.id}" onclick="increaseAmount(${dish.id})" class="add-amount"></button>
                     </div>
 
-                    <p id="price-${indexBasket}" class="basket-menu-price">${(basket[indexBasket].price * basket[indexBasket].amount).toFixed(2).replace(".", ",") + "€"}</p>
+                    <p id="price-${dish.id}" class="basket-menu-price">${(dish.price * dish.amount).toFixed(2).replace(".", ",") + "€"}</p>
                 </div>
                 
             </section>

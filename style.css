@@ -255,7 +255,7 @@ h3 {
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-    
+
 }
 
 .add-to-basket-button:hover {
@@ -264,7 +264,7 @@ h3 {
 
 .add-to-basket-color {
     color: blueviolet;
-    
+
 }
 
 .add-to-basket-text {
@@ -339,17 +339,24 @@ footer {
         width: 800px;
     }
 
+    h5 {
+        padding-top: 0;
+    }
 
+    .shopping-cart-img {
+        width: 120px;
+    }
 
     .mobile-basket-dialog.open {
         display: block;
 
         width: 350px;
-        height: 650px;
+        height: 550px;
         background-color: rgb(32, 33, 32);
         color: white;
         position: fixed;
-        top: -20px;
+        top: -80px;
+        /* bottom: -50px; */
         margin-top: 80px;
         border: none;
         border-radius: 20px 20px 20px 20px;
@@ -359,11 +366,15 @@ footer {
     }
 
     .mobile-basket-menu-container {
-        height: 320px;
+        height: 270px;
         width: 360px;
         overflow: auto;
         overflow-x: hidden;
     }
+
+
+
+
 
     .mobile-basket-menu-container::-webkit-scrollbar {
         width: 10px;
@@ -628,6 +639,14 @@ footer {
 
     }
 
+    .mobile-basket-dialog.open {
+        width: 260px;
+    }
+
+    .mobile-basket-menu-container {
+        width: 270px;
+    }
+
     .basket-mobile {
         justify-content: center;
         gap: 20px;
@@ -637,6 +656,32 @@ footer {
         height: 35px;
 
     }
+
+    .empty-basket-note {
+        width: 270px;
+    }
+
+    .basket-menu-card {
+        width: 210px;
+    }
+
+    .sub-total-container {
+        width: 250px;
+    }
+
+    .delivery-container {
+        width: 250px;
+    }
+
+    .total-container {
+        width: 250px;
+    }
+
+    .buy-now-button {
+        width: 250px;
+    }
+
+
 
 }
 

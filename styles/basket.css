@@ -54,7 +54,7 @@ h5 {
     flex-direction: column;
     text-align: center;
     align-items: center;
-    gap: 50px;
+    gap: 30px;
     font-size: 22px;
     width: 350px;
     font-weight: bold;
@@ -311,4 +311,24 @@ h6 {
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
+}
+
+.badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -50px;
+    left: 20px;
+    border-radius: 50px;
+    color: white;
+    background-color: blueviolet;
+    width: 30px;
+    height: 30px;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.badge-hide {
+    display: none;
 }
