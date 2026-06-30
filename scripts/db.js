@@ -1,6 +1,6 @@
 let  dishes = [
     {   
-        "id": 1,
+        "id": 0,
         "category": "Burger & Sandwiches",
         "name": "Veggie mushroom black burger",
         "price": 16.90,
@@ -10,7 +10,7 @@ let  dishes = [
     },
 
     {
-        "id": 2,
+        "id": 1,
         "category": "Burger & Sandwiches",
         "name": "All meat burger",
         "price": 15.90,
@@ -21,7 +21,7 @@ let  dishes = [
     },
 
     {
-        "id": 3,
+        "id": 2,
         "category": "Burger & Sandwiches",
         "name": "Beef red burger",
         "price": 14.90,
@@ -31,7 +31,7 @@ let  dishes = [
     },
 
     {
-        "id": 4,
+        "id": 3,
         "category": "Burger & Sandwiches",
         "name": "Big chicken burger",
         "price": 15.90,
@@ -41,7 +41,7 @@ let  dishes = [
     },
 
     {
-        "id": 5,
+        "id": 4,
         "category": "Pizza",
         "name": "Pizza Margherita",
         "price": 11.90,
@@ -51,7 +51,7 @@ let  dishes = [
     },
 
     {
-        "id": 6,
+        "id": 5,
         "category": "Pizza",
         "name": "Pizza Chorizo",
         "price": 13.90,
@@ -61,7 +61,7 @@ let  dishes = [
     },
 
     {
-        "id": 7,
+        "id": 6,
         "category": "Pizza",
         "name": "Pizza Funghi",
         "price": 12.90,
@@ -71,7 +71,7 @@ let  dishes = [
     },
 
     {
-        "id": 8,
+        "id": 7,
         "category": "Pizza",
         "name": "Quattro Formaggi with Chicken",
         "price": 15.90,
@@ -81,7 +81,7 @@ let  dishes = [
     },
 
     {
-        "id": 9,
+        "id": 8,
         "category": "Salad",
         "name": "Warm beef arugula salad",
         "price": 16.90,
@@ -91,7 +91,7 @@ let  dishes = [
     },
 
     {
-        "id": 10,
+        "id": 9,
         "category": "Salad",
         "name": "Mini green Salad",
         "price": 7.90,
@@ -101,7 +101,7 @@ let  dishes = [
     },
 
     {
-        "id": 11,
+        "id": 10,
         "category": "Salad",
         "name": "Green Salad with sea food",
         "price": 16.90,
@@ -111,7 +111,7 @@ let  dishes = [
     },
 
     {
-        "id": 12,
+        "id": 11,
         "category": "Salad",
         "name": "Vegan green salad with tofu",
         "price": 14.90,

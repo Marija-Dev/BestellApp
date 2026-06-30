@@ -255,10 +255,20 @@ h3 {
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
+    
 }
 
 .add-to-basket-button:hover {
     color: blueviolet;
+}
+
+.add-to-basket-color {
+    color: blueviolet;
+    
+}
+
+.add-to-basket-text {
+    margin-top: 5px;
 }
 
 footer {

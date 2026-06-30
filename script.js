@@ -17,27 +17,33 @@ function renderDishes() {
     saladRef.innerHTML = "";
 
     for (let indexDishes = 0; indexDishes < dishes.length; indexDishes++) {
-
+        let dish = dishes[indexDishes];
+        
         if (dishes[indexDishes].category === "Burger & Sandwiches") {
-            burgerRef.innerHTML += getBurgerTemplate(indexDishes);
+            
+            burgerRef.innerHTML += getBurgerTemplate(dish);  
         }
 
         if (dishes[indexDishes].category === "Pizza") {
-            pizzaRef.innerHTML += getPizzaTemplate(indexDishes);
+            pizzaRef.innerHTML += getBurgerTemplate(dish);
         }
 
         if (dishes[indexDishes].category === "Salad") {
-            saladRef.innerHTML += getSaladTemplate(indexDishes);
+            saladRef.innerHTML += getBurgerTemplate(dish);
         }
     }
 }
 
+
+
+
 //prüft ob sich bestimmtes menu in basket befindet, wenn ja wird anzahl erhöht, wenn nein wird hinzugefügt
-function addToBasket(indexDishes) {
-    let dishToBasket = dishes[indexDishes];
+function addToBasket(id) {
+
+    let dishToBasket = dishes.find(dish => dish.id === id);
     let found = basket.find(element => element.id === dishToBasket.id);
 
-    menuToPush = {
+    menuToBasket = {
         id: dishToBasket.id,
         name: dishToBasket.name,
         price: dishToBasket.price,
@@ -47,31 +53,43 @@ function addToBasket(indexDishes) {
     if (found) {
         found.amount++;
     } else {
-        basket.push(menuToPush);
+        basket.push(menuToBasket);
     }
 
-    changeAddToBasketButton();
+
     renderBasket();
     calculatePrice();
     buyNow();
+    changeAddToBasketButton(id);
 
 }
 
 
-function changeAddToBasketButton(indexDishes) {
-    let addToBasketButton = document.getElementById(`addToBasketButton-${indexDishes}`);
-    // let addToBasketButton = document.getElementById("addToBasketButton");
-    // let amountToChange = document.getElementById(`menuAmount-${indexBasket}`);
+// ------------TEST---------------
 
-    // addToBasketButton.innerHTML = "";
-    addToBasketButton.innerHTML = `Add to basket`;
 
-    // if (addToBasketButton) {
-    //     addToBasketButton.innerHTML = "Added " ;
-    // }
 
-    changeAmount();
+function changeAddToBasketButton(id) {
+    let addToBasketButton = document.getElementById(`addToBasketButton-${id}`);
+    let found = basket.find(element => element.id === id);
+
+    
+
+    if (found) {
+        addToBasketButton.innerHTML = getAddToBasketBtnTemplate(found);
+        addToBasketButton.classList.add("add-to-basket-color");
+    } else {
+        addToBasketButton.innerHTML = `Add to basket`;
+    }
+    
 }
+
+
+// -----------TEST ENDE-----------
+
+
+
+
 
 
 //lädt basket inhalt, wenn nichts im basket, nachricht -> nothing in here..
@@ -104,29 +122,38 @@ function renderBasket() {
 }
 
 //löscht basket inhalt -> einzelnes menü
-function deleteMenu(indexBasket) {
+function deleteMenu(indexBasket, indexDishes) {
     basket.splice(indexBasket, 1);
 
     renderBasket();
     buyNow();
+    changeAddToBasketButton();
 }
 
 //prüft per id welcher button geklickt wurde, und fügt entweder 1 hinzu oder zieht 1 ab
-function changeAmount(indexBasket) {
+function changeAmount(indexBasket, id) {
     let basketDishes = basket[indexBasket];
     let amountToChange = document.getElementById(`menuAmount-${indexBasket}`);
     let clickedButton = event.target.id;
 
+
     if (clickedButton === `addAmount-${indexBasket}`) {
+
+        
         amountToChange.innerHTML = basketDishes.amount++;
+
+       
 
     } else if (clickedButton === "removeAmount" && basketDishes.amount > 1) {
         amountToChange.innerHTML = basketDishes.amount--;
     }
 
+
+
     renderBasket();
     calculatePrice();
     buyNow();
+    changeAddToBasketButton(id);
 }
 
 function calculatePrice() {
@@ -151,7 +178,7 @@ function calculatePrice() {
 function buyNow() {
     let buyNowPrice = document.getElementsByClassName("buy-now-price");
     let subTotalSum = basket.reduce((sum, dish) => sum + dish.price * dish.amount, 0); //rechnet gesamtsumme im basket aus
-    
+
     for (let i = 0; i < buyNowPrice.length; i++) {
         buyNowPrice[i].innerHTML = "(" + (subTotalSum + delivery).toFixed(2).replace(".", ",") + "€" + ")";
     }
@@ -191,16 +218,3 @@ function toggleMobileBasketDialog() {
 
     mobileBasketDialog.classList.toggle("open");
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

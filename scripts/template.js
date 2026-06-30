@@ -1,27 +1,27 @@
-function getBurgerTemplate(indexDishes) {
+function getBurgerTemplate(dish) {
     return `<section class="single-menu-card">
-                    <img class="single-menu-img" src="${dishes[indexDishes].imgPath}" alt="${dishes[indexDishes].alt}">
+                    <img class="single-menu-img" src="${dish.imgPath}" alt="${dish.alt}">
 
                     <div class="single-meal-description">
                         <div class="name-price-con">
-                            <h4 class="meal-name">${dishes[indexDishes].name}</h4>
+                            <h4 class="meal-name">${dish.name}</h4>
 
                         </div>
                            
                         <div class="price-container"> 
-                            <p class="price">${dishes[indexDishes].price.toFixed(2).replace(".", ",") + "€"}</p>
+                            <p class="price">${dish.price.toFixed(2).replace(".", ",") + "€"}</p>
                         </div>
                             
                         <div>
-                            <p class="ingredients">${dishes[indexDishes].ingredients}</p>
+                            <p class="ingredients">${dish.ingredients}</p>
                         </div>
                     </div>
 
-                    <button onclick="addToBasket(${indexDishes})" id="addToBasketButton-${indexDishes}" class="add-to-basket-button"></button>
+                    <button onclick="addToBasket(${dish.id})" id="addToBasketButton-${dish.id}" class="add-to-basket-button">Add to basket</button>
             </section>`
 }
 
-function getPizzaTemplate(indexDishes, indexBasket) {
+function getPizzaTemplate(indexDishes) {
     return `<section class="single-menu-card">
                     <img class="single-menu-img" src="${dishes[indexDishes].imgPath}" alt="${dishes[indexDishes].alt}">
 
@@ -42,7 +42,7 @@ function getPizzaTemplate(indexDishes, indexBasket) {
            `
 }
 
-function getSaladTemplate(indexDishes, indexBasket) {
+function getSaladTemplate(indexDishes) {
     return `<section class="single-menu-card">
                     <img class="single-menu-img" src="${dishes[indexDishes].imgPath}" alt="${dishes[indexDishes].alt}">
 
@@ -137,6 +137,12 @@ function getOrderedTemplate() {
                 <p class="food-on-way">Your food in on the way!</p>
             </section>
     
+           `
+}
+
+
+function getAddToBasketBtnTemplate(dish) {
+    return `<p class="add-to-basket-text">Added ${dish.amount}</p>
            `
 }
 
