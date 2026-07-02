@@ -1,11 +1,10 @@
-function getBurgerTemplate(dish) {
+function getMenuTemplate(dish) {
     return `<section class="single-menu-card">
                     <img class="single-menu-img" src="${dish.imgPath}" alt="${dish.alt}">
 
                     <div class="single-meal-description">
                         <div class="name-price-con">
                             <h4 class="meal-name">${dish.name}</h4>
-
                         </div>
                            
                         <div class="price-container"> 
@@ -21,48 +20,6 @@ function getBurgerTemplate(dish) {
             </section>`
 }
 
-function getPizzaTemplate(indexDishes) {
-    return `<section class="single-menu-card">
-                    <img class="single-menu-img" src="${dishes[indexDishes].imgPath}" alt="${dishes[indexDishes].alt}">
-
-                    <div class="single-meal-description">
-                        <div class="name-price-con">
-                            <h4 class="meal-name">${dishes[indexDishes].name}</h4>
-                            <p class="price">${dishes[indexDishes].price.toFixed(2).replace(".", ",") + "€"}</p>
-                        </div>
-
-                        <div>
-                            <p class="ingredients">${dishes[indexDishes].ingredients}</p>
-                        </div>
-                    </div>
-
-                    <button onclick="addToBasket(${indexDishes})" id="addToBasketButton" class="add-to-basket-button">Add to basket</button>
-
-            </section>
-           `
-}
-
-function getSaladTemplate(indexDishes) {
-    return `<section class="single-menu-card">
-                    <img class="single-menu-img" src="${dishes[indexDishes].imgPath}" alt="${dishes[indexDishes].alt}">
-
-                    <div class="single-meal-description">
-                        <div class="name-price-con">
-                            <h4 class="meal-name">${dishes[indexDishes].name}</h4>
-                            <p class="price">${dishes[indexDishes].price.toFixed(2).replace(".", ",") + "€"}</p>
-                        </div>
-
-                        <div>
-                            <p class="ingredients">${dishes[indexDishes].ingredients}</p>
-                        </div>
-                    </div>
-
-                    <button onclick="addToBasket(${indexDishes})" id="addToBasketButton" class="add-to-basket-button">Add to basket</button>
-            </section>
-           `
-}
-
-
 function getBasketTemplate(dish) {
     return `<section class="basket-menu-card">
                 <div class="basket-name-container">
@@ -71,15 +28,15 @@ function getBasketTemplate(dish) {
                     <p class="basket-menu-name">${dish.name}</p>
                     
                     <div class="delete-button-container">
-                        <button class="delete-menu-button" onclick="deleteMenu(${dish.id})"></button>
+                        <button class="delete-menu-button" onclick="deleteDish(${dish.id})"></button>
                     </div>
                 </div>
 
                 <div class="basket-amount-container">
                     <div class="change-amount-container">
-                        <button id="removeAmount" onclick="decreaseAmount(${dish.id})" class="remove-amount"></button>
+                        <button id="removeAmount" onclick="decreaseAmount(${dish.id})" class="remove-amount">-</button>
                         <p id="menuAmount-${dish.id}" class="basket-amount">${dish.amount}</p>
-                        <button id="addAmount-${dish.id}" onclick="increaseAmount(${dish.id})" class="add-amount"></button>
+                        <button id="addAmount-${dish.id}" onclick="increaseAmount(${dish.id})" class="add-amount">+</button>
                     </div>
 
                     <p id="price-${dish.id}" class="basket-menu-price">${(dish.price * dish.amount).toFixed(2).replace(".", ",") + "€"}</p>

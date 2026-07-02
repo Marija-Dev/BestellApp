@@ -60,9 +60,7 @@ a {
     color: black;
     font-weight: bold;
     border: solid transparent;
-    /* sorgt dafür dass beim hovern content nicht verschoben wird */
     border-width: 0px 10px 0px 10px;
-
 }
 
 a:hover {
@@ -94,7 +92,6 @@ h3 {
     background-color: blueviolet;
     display: flex;
     height: 60px;
-
     width: 100%;
     position: absolute;
     left: 0;
@@ -105,7 +102,6 @@ h3 {
     background-color: blueviolet;
     display: flex;
     height: 60px;
-
     width: 100%;
     position: absolute;
     top: 1710px;
@@ -116,13 +112,11 @@ h3 {
     background-color: blueviolet;
     display: flex;
     height: 60px;
-
     width: 100%;
     position: absolute;
     top: 2580px;
     left: 0;
 }
-
 
 .category-titles-content {
     display: flex;
@@ -164,8 +158,6 @@ h3 {
     flex-direction: row;
     flex-grow: 1;
     gap: 2px;
-
-    /* background-color: rgb(201, 129, 45); */
 }
 
 .menu-container {
@@ -173,16 +165,9 @@ h3 {
     flex-direction: column;
     width: 1000px;
     margin-top: 70px;
-
 }
 
 .menu-content {
-    /* display: flex;
-    flex-direction: column;
-    align-items: center; */
-
-
-
     width: calc(100% - 100px);
     padding: 80px 16px 16px 16px;
 }
@@ -203,14 +188,11 @@ h3 {
     height: 120px;
     width: 205px;
     border-radius: 15px;
-    /* object-fit: unset; */
 }
 
 .name-price-con {
     display: flex;
     flex-direction: row;
-
-
 }
 
 .meal-name {
@@ -218,13 +200,6 @@ h3 {
     margin: 0;
     width: 330px;
 }
-
-/* .price-container {
-    position: relative;
-    right: 20px;
-    height: 50px;
-    width: 70px;
-} */
 
 .price {
     font-size: 24px;
@@ -255,7 +230,6 @@ h3 {
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-
 }
 
 .add-to-basket-button:hover {
@@ -264,7 +238,6 @@ h3 {
 
 .add-to-basket-color {
     color: blueviolet;
-
 }
 
 .add-to-basket-text {
@@ -283,13 +256,7 @@ footer {
     display: none;
 }
 
-
-
-
-
-
 /* Responsive */
-
 @media (max-width: 1000px) {
     .basket-container {
         display: none;
@@ -297,27 +264,6 @@ footer {
 
     .basket {
         display: none;
-
-        /* width: 300px;
-        height: auto;
-        margin-bottom: 70px;
-        background-color: rgb(32, 33, 32);
-        color: white;
-        position: fixed;
-        top: 0px; */
-        /* left: 00px; */
-        /* margin-top: 80px;
-        border-radius: 20px 20px 20px 20px; */
-
-
-        /* width: 100%; */
-        /* height: 750px; */
-        /* background-color: rgb(32, 33, 32); */
-        /* color: white; */
-        /* position: sticky; */
-        /* top: 0px; */
-        /* margin-top: 80px; */
-        /* border-radius: 20px 0 0 20px; */
     }
 
     .basket-mobile-container {
@@ -349,20 +295,15 @@ footer {
 
     .mobile-basket-dialog.open {
         display: block;
-
         width: 350px;
         height: 550px;
         background-color: rgb(32, 33, 32);
         color: white;
         position: fixed;
         top: -80px;
-        /* bottom: -50px; */
         margin-top: 80px;
         border: none;
         border-radius: 20px 20px 20px 20px;
-
-        /* overflow: auto;
-        overflow-x: hidden; */
     }
 
     .mobile-basket-menu-container {
@@ -371,10 +312,6 @@ footer {
         overflow: auto;
         overflow-x: hidden;
     }
-
-
-
-
 
     .mobile-basket-menu-container::-webkit-scrollbar {
         width: 10px;
@@ -408,25 +345,6 @@ footer {
     }
 }
 
-
-
-/* @media (min-width: 1000px) {
-    .basket {
-        display: block;
-
-        width: 200px;
-        height: 750px;
-        background-color: rgb(32, 33, 32);
-        color: white;
-        position: relative;
-        top: 0px;
-        left: 400px;
-        margin-top: 80px;
-        border-radius: 20px 0 0 20px;
-    }
-} */
-
-
 @media (max-width: 850px) {
     .pizza-titles-fullwidth {
         top: 2330px;
@@ -446,22 +364,15 @@ footer {
 
     .single-menu-img {
         object-fit: cover;
-        object-position: 100%;
         width: auto;
-
-
-        /* image-rendering: initial; */
+        object-position: center;
     }
-
-
 
     .price {
         position: absolute;
         top: 265px;
         left: 20px;
     }
-
-
 
     .ingredients {
         width: 500px;
@@ -483,7 +394,6 @@ footer {
     .burger-headline {
         margin: -5px;
         font-size: 0;
-
     }
 
     .burger-headline::after {
@@ -521,7 +431,6 @@ footer {
         text-align: center;
         width: 350px;
         font-size: 18px;
-
     }
 }
 
@@ -542,30 +451,10 @@ footer {
         top: 3830px;
     }
 
-    /* .single-menu-card {
-        display: flex;
-        flex-direction: column;
-
-        margin-left: 20px;
-        /* width: 320px; */
-    /* height: auto; */
-
-    /* } */
-
     .ingredients {
-
         width: 450px;
     }
-
-
-
-
-
 }
-
-
-
-
 
 @media (max-width: 630px) {
     .menu-links {
@@ -579,7 +468,6 @@ footer {
 
     .salad-titles-fullwidth {
         top: 3900px;
-        /* margin-bottom: 20px; */
     }
 
     .burger-logo {
@@ -623,9 +511,7 @@ footer {
         position: absolute;
         left: 20px;
         bottom: -15px;
-        margin-top: auto;
-        /*schiebt container automatisch unter den darüberliegenden*/
-
+        margin-top: auto; /*schiebt container automatisch unter den darüberliegenden*/
     }
 
     footer {
@@ -636,7 +522,6 @@ footer {
 
     .footer {
         margin: 0;
-
     }
 
     .mobile-basket-dialog.open {
@@ -654,7 +539,6 @@ footer {
 
     .basket-mobile-img {
         height: 35px;
-
     }
 
     .empty-basket-note {
@@ -680,9 +564,6 @@ footer {
     .buy-now-button {
         width: 250px;
     }
-
-
-
 }
 
 @media (max-width: 480px) {
@@ -698,14 +579,11 @@ footer {
 
     .menu-content {
         width: 300px;
-        /* margin-left: 10px; */
         padding-left: 0px;
     }
 
     .single-menu-card {
         width: 220px;
         margin-left: 20px;
-        /* margin-left: 10px; */
-        /* padding-right: 0; */
     }
 }

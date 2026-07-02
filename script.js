@@ -20,29 +20,25 @@ function renderDishes() {
         let dish = dishes[indexDishes];
 
         if (dishes[indexDishes].category === "Burger & Sandwiches") {
-
-            burgerRef.innerHTML += getBurgerTemplate(dish);
+            burgerRef.innerHTML += getMenuTemplate(dish);
         }
 
         if (dishes[indexDishes].category === "Pizza") {
-            pizzaRef.innerHTML += getBurgerTemplate(dish);
+            pizzaRef.innerHTML += getMenuTemplate(dish);
         }
 
         if (dishes[indexDishes].category === "Salad") {
-            saladRef.innerHTML += getBurgerTemplate(dish);
+            saladRef.innerHTML += getMenuTemplate(dish);
         }
     }
 }
 
-
-
-
-//prüft ob sich bestimmtes menu in basket befindet, wenn ja wird anzahl erhöht, wenn nein wird hinzugefügt
+// prüft per id ob sich bestimmtes dish im basket befindet, wenn ja anzahl wird erhöht, wenn nein wird hinzugefügt
 function addToBasket(id) {
-    let currentDish = dishes.find(dish => dish.id === id);
-    let existingDish = basket.find(element => element.id === currentDish.id);
+    let currentDish = dishes.find(dish => dish.id === id); //prüft per id angeklicktes dish
+    let existingDish = basket.find(element => element.id === currentDish.id); //prüft per id ob sich angeklicktes dish im basket befindet
 
-    let newDish = {
+    let newDish = { //wenn existingDish nicht im basket, wird per newDish hinzugefügt
         id: currentDish.id,
         name: currentDish.name,
         price: currentDish.price,
@@ -55,19 +51,12 @@ function addToBasket(id) {
         basket.push(newDish);
     }
 
-
     renderBasket();
     calculatePrice();
     buyNow();
     changeAddToBasketButton(id);
-    showBadge();
-
+    showBadge(id);
 }
-
-
-// ------------TEST---------------
-
-
 
 function changeAddToBasketButton(id) {
     let addToBasketButton = document.getElementById(`addToBasketButton-${id}`);
@@ -82,9 +71,6 @@ function changeAddToBasketButton(id) {
     }
 }
 
-
-// -----------TEST ENDE-----------
-
 function resetAllAddToBasketButtons() {
     let allAddToBasketButtons = document.querySelectorAll(".add-to-basket-button");
 
@@ -94,9 +80,6 @@ function resetAllAddToBasketButtons() {
         allAddToBasketButtons[i].innerHTML = `Add to basket`;
     }
 }
-
-
-
 
 //lädt basket inhalt, wenn nichts im basket, nachricht -> nothing in here..
 //rechnet direkt im getBasketTemplate menge mal preis aus und zeigt es im html an (vom einzelnen menü)
@@ -129,7 +112,7 @@ function renderBasket() {
 }
 
 //löscht basket inhalt -> einzelnes menü
-function deleteMenu(id) {
+function deleteDish(id) {
     let indexBasket = basket.findIndex(dish => dish.id === id);
 
     if (indexBasket === -1) {
@@ -141,27 +124,10 @@ function deleteMenu(id) {
     renderBasket();
     buyNow();
     changeAddToBasketButton(id);
+    showBadge(id);
 }
 
-//prüft per id welcher button geklickt wurde, und fügt entweder 1 hinzu oder zieht 1 ab
-// function changeAmount(indexBasket, id) {
-//     let basketDishes = basket[indexBasket];
-//     let amountToChange = document.getElementById(`menuAmount-${indexBasket}`);
-//     let clickedButton = event.target.id;
-
-//     if (clickedButton === `addAmount-${indexBasket}`) {
-//         amountToChange.innerHTML = basketDishes.amount++;
-//     } else if (clickedButton === "removeAmount" && basketDishes.amount > 1) {
-//         amountToChange.innerHTML = basketDishes.amount--;
-//     }
-
-//     renderBasket();
-//     calculatePrice();
-//     buyNow();
-//     changeAddToBasketButton(id);
-// }
-
-
+//fügt im basket 1 hinzu
 function increaseAmount(id) {
     let currentDish = basket.find(dish => dish.id === id);
 
@@ -175,8 +141,10 @@ function increaseAmount(id) {
     calculatePrice();
     buyNow();
     changeAddToBasketButton(id);
+    showBadge(id);
 }
 
+// entfernt im basket 1 
 function decreaseAmount(id) {
     let currentDish = basket.find(dish => dish.id === id);
 
@@ -187,23 +155,22 @@ function decreaseAmount(id) {
     if (currentDish.amount > 1) {
         currentDish.amount--;
     } else if (currentDish.amount <= 1) {
-        deleteMenu(id);
+        deleteDish(id);
     }
 
     renderBasket();
     calculatePrice();
     buyNow();
     changeAddToBasketButton(id);
+    showBadge(id);
 }
 
-
-
-
+// rechnet preis aller gerichte zusammen und fügt sie per classname in die entsprechenden container
 function calculatePrice() {
     let subTotal = document.getElementsByClassName("sub-price");
     let deliveryFee = document.getElementsByClassName("delivery-price");
     let total = document.getElementsByClassName("total-price");
-    let subTotalSum = basket.reduce((sum, dish) => sum + dish.price * dish.amount, 0);
+    let subTotalSum = basket.reduce((sum, dish) => sum + dish.price * dish.amount, 0); //rechnet preis aller im basket befindlichen gerichte zusammen
 
     for (let i = 0; i < subTotal.length; i++) {
         subTotal[i].innerHTML = subTotalSum.toFixed(2).replace(".", ",") + "€";
@@ -220,14 +187,15 @@ function calculatePrice() {
 
 function buyNow() {
     let buyNowPrice = document.getElementsByClassName("buy-now-price");
-    let subTotalSum = basket.reduce((sum, dish) => sum + dish.price * dish.amount, 0); //rechnet gesamtsumme im basket aus
+    let subTotalSum = basket.reduce((sum, dish) => sum + dish.price * dish.amount, 0); //rechnet gesamtsumme im basket aus, ohne delivery
 
     for (let i = 0; i < buyNowPrice.length; i++) {
         buyNowPrice[i].innerHTML = "(" + (subTotalSum + delivery).toFixed(2).replace(".", ",") + "€" + ")";
     }
 }
 
-function openOrderedDialog() {
+// öffnet dialog bei klick auf "buyNow"-Button
+function openOrderedDialog(id) {
     orderedDialog.innerHTML = getOrderedTemplate();
     orderedDialog.showModal();
     orderedDialog.classList.add("opened");
@@ -237,18 +205,19 @@ function openOrderedDialog() {
     let mobileCheckOutContainer = document.getElementById("mobileCheckOutContainer");
     let clickedButton = event.target.id; //gibt die id des angeklickten button aus
 
-    if (clickedButton === "buyNowButton" || clickedButton === "buyNowPrice") { //vergleicht angeklickte id mit: "buyNowButton", ...
-        basketRef.classList.add("remove-basket"); //... wenn ja, entfernt basket nach klick auf bestellbutton
-        mobileBasketDialog.classList.remove("open");
+    if (clickedButton === "buyNowButton" || clickedButton === "buyNowPrice") { //vergleicht angeklickte id mit: "buyNowButton"  oder "buyNowPrice" id, ...
+        basketRef.classList.add("remove-basket"); //... wenn gleich, entfernt basket nach klick auf bestellbutton ... 
+        mobileBasketDialog.classList.remove("open"); //... bzw entfernt hier mobile basket
         mobileBasketRef.innerHTML = getEmptyBasketNoteTemplate();
         mobileCheckOutContainer.innerHTML = "";
 
         setTimeout(() => {
-            setTimeout(closeOrderedDialog, 5000); //führt closeOrderedDialog funktion nach 5000 ms aus
+            setTimeout(closeOrderedDialog, 5000); //führt closeOrderedDialog funktion nach 5000 ms -> 5 sec aus
         });
     }
 
     resetAllAddToBasketButtons();
+    showBadge(id);
 }
 
 function closeOrderedDialog() {
@@ -256,6 +225,7 @@ function closeOrderedDialog() {
     orderedDialog.classList.remove("opened");
 }
 
+// öffnet/schliesst mobilen basket bei klick auf basket icon 
 function toggleMobileBasketDialog() {
     let basketMobileContent = document.getElementById("mobileBasketContent");
 
@@ -268,13 +238,28 @@ function toggleMobileBasketDialog() {
     mobileBasketDialog.classList.toggle("open");
 }
 
-
-function showBadge() {
+// fügt basket icon badge mit aktueller anzahl der einzelnen gerichte hinzu, wenn 0 im warenkorb, badge verschwindet
+function showBadge(id) {
     let badge = document.getElementById("badge");
-    let mobileBasket = document.getElementById("mobileBasketContent");
-    
+    let totalAmount = basket.reduce((amount, dish) => amount + dish.amount, 0);
+    let currentDish = basket.find(dish => dish.id === id);
+    let clickedButton = event.target.id;
 
-    if (mobileBasket === "") {
+    if (currentDish) {
+        badge.classList.remove("badge-hide");
+        badge.innerHTML = totalAmount;
+    }
+
+    if (!currentDish) {
+        badge.innerHTML = totalAmount;
+    } 
+    
+    if (!currentDish && totalAmount === 0) {
         badge.classList.add("badge-hide");
     }
+
+    if (clickedButton === "buyNowButton" || clickedButton === "buyNowPrice") {
+        badge.classList.add("badge-hide");
+    }
+
 }

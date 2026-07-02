@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="./styles/standard.css">
     <link rel="stylesheet" href="./assets/fonts/fonts.css">
     <link rel="stylesheet" href="./style.css">
-
 </head>
 
 <body onload="init()">
@@ -32,7 +31,6 @@
 
         <section class="headline-container">
             <img class="hero-img" src="./assets/img/hero.jpg" alt="Menü">
-
             <img class="burger-logo" src="./assets/icons/burger-logo.png" alt="Burger logo">
 
             <div class="heading-container">
@@ -110,12 +108,17 @@
                     <a href="index.html"><img class="basket-mobile-img" src="./assets/icons/nav-home.svg" alt="Home">
                     </a>
 
-                    <img class="basket-mobile-img" src="./assets/icons/nav-profile.svg" alt="Profile">
-                    <img class="basket-mobile-img" src="./assets/icons/nav-logo.svg" alt="Logo">
+                    <a href="">
+                        <img class="basket-mobile-img" src="./assets/icons/nav-profile.svg" alt="Profile">
+                    </a>
+
+                    <a href="index.html">
+                        <img class="basket-mobile-img" src="./assets/icons/nav-logo.svg" alt="Logo">
+                    </a>
 
                     <button class="basket-mobile-button" onclick="toggleMobileBasketDialog()">
                         <img class="basket-mobile-img" src="./assets/icons/nav-cart.svg" alt="Cart">
-                        <span id="badge" class="badge">2</span>
+                        <span id="badge" class="badge badge-hide"></span>
                     </button>
                 </div>
             </section>
@@ -147,7 +150,7 @@
     </footer>
 
 
-    
+
 </body>
 
 

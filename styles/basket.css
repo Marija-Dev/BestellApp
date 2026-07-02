@@ -20,24 +20,26 @@
 }
 
 .basket-mobile-button {
-    height: 40px;
-    width: 40px;
+    width: 60px;
+    height: 45px;
     padding: 0;
-    border: none;
+    border: 5px solid transparent;
+    border-radius: 30px;
     background-color: transparent;
-    cursor: pointer;
+    cursor: pointer;  
 }
 
 .basket-mobile-button:hover {
-    background-color: blueviolet;
+    background-color: rgb(221, 189, 252);
+    border-color: transparent;
+    border-radius: 30px;
+    width: 60px;
+    height: 45px;
 }
 
 .basket-mobile-img {
     height: 40px;
 }
-
-
-
 
 h5 {
     display: flex;
@@ -65,7 +67,6 @@ h5 {
 .shopping-cart-img {
     width: 150px;
     filter: brightness(0) saturate(100%) invert(82%) sepia(21%) saturate(1455%) hue-rotate(200deg) brightness(90%) contrast(102%);
-
 }
 
 .single-menu-container {
@@ -118,7 +119,6 @@ h5 {
 .basket-amount-container {
     display: flex;
     justify-content: space-between;
-
 }
 
 .delete-button-container {
@@ -141,28 +141,26 @@ h5 {
 }
 
 .remove-amount {
-    background-image: url("../assets/icons/remove.png");
-    background-repeat: no-repeat;
     background-color: transparent;
     border: 0;
-    margin-top: 22px;
+    margin-top: 8px;
+    font-size: 22px;
+    font-weight: bold;
     cursor: pointer;
     height: 15px;
 }
 
 .add-amount {
-    background-image: url("../assets/icons/add.png");
-    background-repeat: no-repeat;
     background-color: transparent;
     border: 0;
-    margin-top: 18px;
+    margin-top: 10px;
+    font-size: 22px;
+    font-weight: bold;
     cursor: pointer;
     height: 15px;
 }
 
 .basket-menu-price {
-    /* position: relative;
-    left: 190px; */
     margin: 0;
 }
 
@@ -249,10 +247,7 @@ h6 {
     cursor: pointer;
 }
 
-
-
 /* dialog style */
-
 .ordered-dialog.opened {
     display: flex;
     justify-content: center;
@@ -264,8 +259,6 @@ h6 {
     border-radius: 20px;
     padding-top: 40px;
     background-color: rgb(35, 35, 35);
-
-
 }
 
 .ordered-dialog::backdrop {
@@ -297,6 +290,7 @@ h6 {
     margin: 0;
     color: rgb(221, 189, 252);
 }
+/* dialog style ende */
 
 .remove-basket {
     display: none;
