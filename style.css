@@ -256,6 +256,12 @@ footer {
     display: none;
 }
 
+.favicon {
+    filter: brightness(0) saturate(100%) invert(56%) sepia(21%) saturate(1455%) hue-rotate(200deg) brightness(90%) contrast(102%);
+    color: blueviolet;
+
+}
+
 /* Responsive */
 @media (max-width: 1000px) {
     .basket-container {
@@ -359,7 +365,6 @@ footer {
         width: 500px;
         height: 280px;
         padding: 20px;
-        margin-left: 20px;
     }
 
     .single-menu-img {
@@ -432,6 +437,10 @@ footer {
         width: 350px;
         font-size: 18px;
     }
+
+    .single-menu-card {
+        margin-left: 50px;
+    }
 }
 
 @media (max-width: 650px) {
@@ -453,6 +462,10 @@ footer {
 
     .ingredients {
         width: 450px;
+    }
+
+    .single-menu-card {
+        margin-left: 20px;
     }
 }
 
@@ -511,7 +524,8 @@ footer {
         position: absolute;
         left: 20px;
         bottom: -15px;
-        margin-top: auto; /*schiebt container automatisch unter den darüberliegenden*/
+        margin-top: auto;
+        /*schiebt container automatisch unter den darüberliegenden*/
     }
 
     footer {

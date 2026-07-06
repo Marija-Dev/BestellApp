@@ -2,8 +2,10 @@ let orderedDialog = document.getElementById("myOrderedDialog");
 let mobileBasketDialog = document.getElementById("mobileBasketDialogID");
 
 function init() {
+    getFromLocalStorage();
     renderDishes();
     renderBasket();
+    updateAddToBasketBtns();
 }
 
 //fügt die dishes je nach kategorie in zugehörigen html container
@@ -31,6 +33,9 @@ function renderDishes() {
             saladRef.innerHTML += getMenuTemplate(dish);
         }
     }
+
+
+    // saveToLocalStorage();
 }
 
 // prüft per id ob sich bestimmtes dish im basket befindet, wenn ja anzahl wird erhöht, wenn nein wird hinzugefügt
@@ -54,8 +59,10 @@ function addToBasket(id) {
     renderBasket();
     calculatePrice();
     buyNow();
+
     changeAddToBasketButton(id);
     showBadge(id);
+    saveToLocalStorage();
 }
 
 function changeAddToBasketButton(id) {
@@ -76,7 +83,6 @@ function resetAllAddToBasketButtons() {
 
     for (let i = 0; i < allAddToBasketButtons.length; i++) {
         allAddToBasketButtons[i].classList.remove("add-to-basket-color");
-
         allAddToBasketButtons[i].innerHTML = `Add to basket`;
     }
 }
@@ -109,6 +115,9 @@ function renderBasket() {
     }
 
     calculatePrice();
+
+
+    // saveToLocalStorage();
 }
 
 //löscht basket inhalt -> einzelnes menü
@@ -125,6 +134,7 @@ function deleteDish(id) {
     buyNow();
     changeAddToBasketButton(id);
     showBadge(id);
+    saveToLocalStorage();
 }
 
 //fügt im basket 1 hinzu
@@ -142,6 +152,7 @@ function increaseAmount(id) {
     buyNow();
     changeAddToBasketButton(id);
     showBadge(id);
+    saveToLocalStorage();
 }
 
 // entfernt im basket 1 
@@ -163,6 +174,7 @@ function decreaseAmount(id) {
     buyNow();
     changeAddToBasketButton(id);
     showBadge(id);
+    saveToLocalStorage();
 }
 
 // rechnet preis aller gerichte zusammen und fügt sie per classname in die entsprechenden container
@@ -170,6 +182,7 @@ function calculatePrice() {
     let subTotal = document.getElementsByClassName("sub-price");
     let deliveryFee = document.getElementsByClassName("delivery-price");
     let total = document.getElementsByClassName("total-price");
+    let buyNow = document.getElementsByClassName("buy-now-button");
     let subTotalSum = basket.reduce((sum, dish) => sum + dish.price * dish.amount, 0); //rechnet preis aller im basket befindlichen gerichte zusammen
 
     for (let i = 0; i < subTotal.length; i++) {
@@ -183,6 +196,13 @@ function calculatePrice() {
     for (let i = 0; i < total.length; i++) {
         total[i].innerHTML = (subTotalSum + delivery).toFixed(2).replace(".", ",") + "€";
     }
+
+    for (let i = 0; i < buyNow.length; i++) {
+        buyNow[i].innerHTML = "Buy now " + "(" + (subTotalSum + delivery).toFixed(2).replace(".", ",") + "€" + ")";
+
+    }
+
+    saveToLocalStorage();
 }
 
 function buyNow() {
@@ -192,6 +212,8 @@ function buyNow() {
     for (let i = 0; i < buyNowPrice.length; i++) {
         buyNowPrice[i].innerHTML = "(" + (subTotalSum + delivery).toFixed(2).replace(".", ",") + "€" + ")";
     }
+
+    saveToLocalStorage();
 }
 
 // öffnet dialog bei klick auf "buyNow"-Button
@@ -217,12 +239,15 @@ function openOrderedDialog(id) {
     }
 
     resetAllAddToBasketButtons();
-    showBadge(id);
+    // showBadge(id);
+    // saveToLocalStorage();
 }
 
 function closeOrderedDialog() {
     orderedDialog.close();
     orderedDialog.classList.remove("opened");
+
+    saveToLocalStorage();
 }
 
 // öffnet/schliesst mobilen basket bei klick auf basket icon 
@@ -236,6 +261,8 @@ function toggleMobileBasketDialog() {
     }
 
     mobileBasketDialog.classList.toggle("open");
+
+    saveToLocalStorage();
 }
 
 // fügt basket icon badge mit aktueller anzahl der einzelnen gerichte hinzu, wenn 0 im warenkorb, badge verschwindet
@@ -252,8 +279,8 @@ function showBadge(id) {
 
     if (!currentDish) {
         badge.innerHTML = totalAmount;
-    } 
-    
+    }
+
     if (!currentDish && totalAmount === 0) {
         badge.classList.add("badge-hide");
     }
@@ -262,4 +289,31 @@ function showBadge(id) {
         badge.classList.add("badge-hide");
     }
 
+    // saveToLocalStorage();
+}
+
+
+
+//speichert das ganze dishes object im localstorage
+function saveToLocalStorage() {
+    localStorage.setItem("basket", JSON.stringify(basket));
+}
+
+//lädt das ganze dishes object aus dem localstorage
+function getFromLocalStorage() {
+    let myBasket = JSON.parse(localStorage.getItem("basket"));
+
+    if (myBasket) {
+        basket = myBasket;
+    } else {
+        basket;
+    }
+}
+
+// zeigt die aktuelle stückzahl im basket an nachdem seite neu geladen wird
+function updateAddToBasketBtns() {
+    for (let i = 0; i < basket.length; i++) {
+        changeAddToBasketButton(basket[i].id);
+        showBadge(basket[i].id);
+    }
 }
