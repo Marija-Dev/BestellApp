@@ -163,6 +163,7 @@ h3 {
 .menu-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 1000px;
     margin-top: 70px;
 }
@@ -188,6 +189,7 @@ h3 {
     height: 120px;
     width: 205px;
     border-radius: 15px;
+    object-fit: cover;
 }
 
 .name-price-con {
@@ -259,11 +261,10 @@ footer {
 .favicon {
     filter: brightness(0) saturate(100%) invert(56%) sepia(21%) saturate(1455%) hue-rotate(200deg) brightness(90%) contrast(102%);
     color: blueviolet;
-
 }
 
 /* Responsive */
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
     .basket-container {
         display: none;
     }
@@ -310,6 +311,8 @@ footer {
         margin-top: 80px;
         border: none;
         border-radius: 20px 20px 20px 20px;
+        overflow: hidden;
+        overscroll-behavior: none;
     }
 
     .mobile-basket-menu-container {
@@ -351,7 +354,7 @@ footer {
     }
 }
 
-@media (max-width: 850px) {
+@media (max-width: 880px) {
     .pizza-titles-fullwidth {
         top: 2330px;
     }
@@ -362,7 +365,7 @@ footer {
 
     .single-menu-card {
         flex-direction: column;
-        width: 500px;
+        width: 400px;
         height: 280px;
         padding: 20px;
     }
@@ -370,7 +373,6 @@ footer {
     .single-menu-img {
         object-fit: cover;
         width: auto;
-        object-position: center;
     }
 
     .price {
@@ -380,7 +382,7 @@ footer {
     }
 
     .ingredients {
-        width: 500px;
+        width: 400px;
         height: auto;
         padding-bottom: 50px;
     }
@@ -427,7 +429,6 @@ footer {
     .salad-headline {
         margin: -20px;
     }
-
 }
 
 @media (max-width: 700px) {
@@ -525,7 +526,6 @@ footer {
         left: 20px;
         bottom: -15px;
         margin-top: auto;
-        /*schiebt container automatisch unter den darüberliegenden*/
     }
 
     footer {
@@ -581,8 +581,28 @@ footer {
 }
 
 @media (max-width: 480px) {
+    .hero-img {
+        height: 260px;
+    }
+
+    .headline-container {
+        height: 600px;
+    }
+
     .single-menu-card {
-        margin-left: 50px;
+        margin-left: 40px;
+    }
+
+    .burger-titles-fullwidth {
+        top: 750px;
+    }
+
+    .pizza-titles-fullwidth {
+        top: 2300px;
+    }
+
+    .salad-titles-fullwidth {
+        top: 3800px;
     }
 }
 

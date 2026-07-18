@@ -5,10 +5,11 @@ function init() {
     getFromLocalStorage();
     renderDishes();
     renderBasket();
+    renderMobileBasket();
     updateAddToBasketBtns();
 }
 
-//fügt die dishes je nach kategorie in zugehörigen html container
+//sorts dishes into the correct container according to category
 function renderDishes() {
     let burgerRef = document.getElementById("allBurgers");
     let pizzaRef = document.getElementById("allPizza");
@@ -27,11 +28,11 @@ function renderDishes() {
     }
 }
 
-// prüft per id ob sich bestimmtes dish im basket befindet, wenn ja anzahl wird erhöht, wenn nein wird hinzugefügt
+// looks up a dish by ID in the basket and either increases its quantity or inserts it if missing
 function addToBasket(id) {
-    let currentDish = dishes.find(dish => dish.id === id); //prüft per id angeklicktes dish
-    let existingDish = basket.find(element => element.id === currentDish.id); //prüft per id ob sich angeklicktes dish im basket befindet
-    let newDish = { //wenn existingDish nicht im basket, wird per newDish hinzugefügt
+    let currentDish = dishes.find(dish => dish.id === id);
+    let existingDish = basket.find(element => element.id === currentDish.id); 
+    let newDish = {
         id: currentDish.id,
         name: currentDish.name,
         price: currentDish.price,
@@ -45,10 +46,12 @@ function addToBasket(id) {
     }
 
     renderBasket();
+    renderMobileBasket();
     changeAddToBasketButton(id);
     showBadge(id);
 }
 
+// changes design and text from "add to basket" button to "added 1" if dish is in basket
 function changeAddToBasketButton(id) {
     let addToBasketButton = document.getElementById(`addToBasketButton-${id}`);
     let existingDish = basket.find(element => element.id === id);
@@ -62,6 +65,7 @@ function changeAddToBasketButton(id) {
     }
 }
 
+// resets all "add to basket" buttons 
 function resetAllAddToBasketButtons() {
     let allAddToBasketButtons = document.querySelectorAll(".add-to-basket-button");
 
@@ -71,38 +75,47 @@ function resetAllAddToBasketButtons() {
     }
 }
 
-//lädt basket inhalt, wenn nichts im basket, nachricht -> nothing in here..
-//rechnet direkt im getBasketTemplate menge mal preis aus und zeigt es im html an (vom einzelnen menü)
+// renders basket content, if basket empty shows "nothin in here.." message
+// calculates the total amount for each menu item in getBasketTemplate using its price and displays it in the HTML
 function renderBasket() {
     let basketRef = document.getElementById("addedBasketMenu");
     let checkOutCon = document.getElementById("checkOutContainer");
+    basketRef.innerHTML = "";
+
+    for (let indexBasket = 0; indexBasket < basket.length; indexBasket++) {
+        let basketDish = basket[indexBasket];
+        basketRef.innerHTML += getBasketTemplate(basketDish);
+    }
+    if (basket.length === 0) {
+        basketRef.innerHTML = getEmptyBasketNoteTemplate();
+        checkOutCon.innerHTML = "";
+    } else if (basket.length !== 0) {
+        checkOutCon.innerHTML = getSubTotalTemplate();
+    }
+    calculatePrice();
+}
+
+// renders mobile basket content, if basket empty shows "nothin in here.." message
+// calculates the total amount for each menu item in getBasketTemplate using its price and displays it in the HTML
+function renderMobileBasket() {
     let basketMobileRef = document.getElementById("mobileBasketContent");
     let mobileCheckOut = document.getElementById("mobileCheckOutContainer");
-
-    basketRef.innerHTML = "";
     basketMobileRef.innerHTML = "";
 
     for (let indexBasket = 0; indexBasket < basket.length; indexBasket++) {
         let basketDish = basket[indexBasket];
-
-        basketRef.innerHTML += getBasketTemplate(basketDish);
         basketMobileRef.innerHTML += getBasketTemplate(basketDish);
     }
-
     if (basket.length === 0) {
-        basketRef.innerHTML = getEmptyBasketNoteTemplate();
-        checkOutCon.innerHTML = "";
         basketMobileRef.innerHTML = getEmptyBasketNoteTemplate();
         mobileCheckOut.innerHTML = "";
     } else if (basket.length !== 0) {
-        checkOutCon.innerHTML = getSubTotalTemplate();
         mobileCheckOut.innerHTML = getSubTotalTemplate();
     }
-
     calculatePrice();
 }
 
-//löscht basket inhalt -> einzelnes menü
+// deletes single dish from basket
 function deleteDish(id) {
     let indexBasket = basket.findIndex(dish => dish.id === id);
 
@@ -113,45 +126,31 @@ function deleteDish(id) {
     basket.splice(indexBasket, 1);
 
     renderBasket();
+    renderMobileBasket();
     changeAddToBasketButton(id);
     showBadge(id);
 }
 
-//fügt im basket 1 hinzu
-function increaseAmount(id) {
+// changes the amount of a single dish in the basket; if the amount is 1 and the user clicks "-", the dish is removed
+function changeAmount(id) {
     let currentDish = basket.find(dish => dish.id === id);
+    let clickedButton = event.target.id;
 
-    if (!currentDish) {
-        return;
-    }
-
-    currentDish.amount++;
-
-    renderBasket();
-    changeAddToBasketButton(id);
-    showBadge(id);
-}
-
-// entfernt im basket 1 
-function decreaseAmount(id) {
-    let currentDish = basket.find(dish => dish.id === id);
-
-    if (!currentDish) {
-        return;
-    }
-
-    if (currentDish.amount > 1) {
+    if (clickedButton === "removeAmount" && currentDish.amount > 1) {
         currentDish.amount--;
+    } else if (clickedButton === "addAmount") {
+        currentDish.amount++;
     } else if (currentDish.amount <= 1) {
         deleteDish(id);
     }
 
     renderBasket();
+    renderMobileBasket();
     changeAddToBasketButton(id);
     showBadge(id);
 }
 
-// rechnet preis aller gerichte zusammen und fügt sie per classname in die entsprechenden container
+// calculates the total price of all dishes and renders it in the container matching the className
 function calculatePrice() {
     let subTotal = document.getElementsByClassName("sub-price");
     let deliveryFee = document.getElementsByClassName("delivery-price");
@@ -169,6 +168,7 @@ function calculatePrice() {
     saveToLocalStorage();
 }
 
+// calculates the price of all dishes and displays it in the "buyNow" - button 
 function buyNow() {
     let buyNowPrice = document.getElementsByClassName("buy-now-price");
     let subTotalSum = basket.reduce((sum, dish) => sum + dish.price * dish.amount, 0); //rechnet gesamtsumme im basket aus, ohne delivery
@@ -178,40 +178,70 @@ function buyNow() {
     }
 }
 
-// öffnet dialog bei klick auf "buyNow"-Button
+// opens the "order done" dialog if user clicks on "buyNow"- button
 function openOrderedDialog(id) {
     orderedDialog.innerHTML = getOrderedTemplate();
     orderedDialog.showModal();
     orderedDialog.classList.add("opened");
 
-    let basketRef = document.getElementById("myBasket");
+    resetAllAddToBasketButtons();
+    showBadge(id);
+    autoDialogClose();
+    emptyBasket();
+    emptyMobileBasket();
+}
+
+// empties the basket content and hides the basket for 5 seconds
+function emptyBasket() {
+    let basket = document.getElementById("myBasket");
+    let basketRef = document.getElementById("addedBasketMenu");
+    let basketCheckOutCon = document.getElementById("checkOutContainer");
+    let clickedButton = event.target.id;
+
+    if (clickedButton === "buyNowButton" || clickedButton === "buyNowPrice") {
+        basket.classList.add("remove-basket");
+        basketRef.innerHTML = getEmptyBasketNoteTemplate();
+        basketCheckOutCon.innerHTML = "";
+    }
+
+    setTimeout(() => {
+        basket.classList.remove("remove-basket");
+    }, 5000);
+    deleteItems();
+}
+
+// clears all basket items and temporarily hides the basket for 5 seconds
+function emptyMobileBasket() {
     let mobileBasketRef = document.getElementById("mobileBasketContent");
     let mobileCheckOutContainer = document.getElementById("mobileCheckOutContainer");
     let clickedButton = event.target.id; //gibt die id des angeklickten button aus
 
     if (clickedButton === "buyNowButton" || clickedButton === "buyNowPrice") { //vergleicht angeklickte id mit: "buyNowButton"  oder "buyNowPrice" id, ...
-        basketRef.classList.add("remove-basket"); //... wenn gleich, entfernt basket nach klick auf bestellbutton ... 
         mobileBasketDialog.classList.remove("open"); //... bzw entfernt hier mobile basket
         mobileBasketRef.innerHTML = getEmptyBasketNoteTemplate();
         mobileCheckOutContainer.innerHTML = "";
-
-        setTimeout(() => {
-            setTimeout(closeOrderedDialog, 5000); //führt closeOrderedDialog funktion nach 5000 ms -> 5 sec aus
-        });
     }
 
-    resetAllAddToBasketButtons();
-    showBadge(id);
+    setTimeout(() => {
+        mobileBasketDialog.classList.add("open");
+    }, 5000);
+    deleteItems();
 }
 
+// auto-closes the "order done" dialog 5 seconds after the order is done
+function autoDialogClose() {
+    setTimeout(() => {
+        setTimeout(closeOrderedDialog, 5000);
+    });
+}
+
+// closes the "order done" dialog when user clicks on the "x"
 function closeOrderedDialog() {
     orderedDialog.close();
     orderedDialog.classList.remove("opened");
-
-    saveToLocalStorage();
 }
 
-// öffnet/schliesst mobilen basket bei klick auf basket icon 
+// toggles the mobile basket when the basket icon is clicked
 function toggleMobileBasketDialog() {
     let basketMobileContent = document.getElementById("mobileBasketContent");
 
@@ -226,7 +256,7 @@ function toggleMobileBasketDialog() {
     saveToLocalStorage();
 }
 
-// fügt basket icon badge mit aktueller anzahl der einzelnen gerichte hinzu, wenn 0 im warenkorb, badge verschwindet
+// shows a badge with dish count; hides it when the basket is empty
 function showBadge(id) {
     let badge = document.getElementById("badge");
     let totalAmount = basket.reduce((amount, dish) => amount + dish.amount, 0);
@@ -245,7 +275,7 @@ function showBadge(id) {
     }
 }
 
-// zeigt die aktuelle stückzahl im basket an nachdem seite neu geladen wird
+// Updates the dish count in the "add to basket" button when the page loads
 function updateAddToBasketBtns() {
     for (let i = 0; i < basket.length; i++) {
         changeAddToBasketButton(basket[i].id);
@@ -253,18 +283,24 @@ function updateAddToBasketBtns() {
     }
 }
 
-//speichert das basket object im localstorage
+// saves the basket object in localstorage
 function saveToLocalStorage() {
     localStorage.setItem("basket", JSON.stringify(basket));
 }
 
-//lädt das basket object aus dem localstorage
+// loads the basket object from the localstorage
 function getFromLocalStorage() {
     let myBasket = JSON.parse(localStorage.getItem("basket"));
+
     if (myBasket) {
         basket = myBasket;
     } else {
         basket;
     }
+}
+
+// clears all data from localstorage
+function deleteItems() {
+  localStorage.clear();
 }
 

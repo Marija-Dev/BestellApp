@@ -34,9 +34,9 @@ function getBasketTemplate(dish) {
 
                 <div class="basket-amount-container">
                     <div class="change-amount-container">
-                        <button id="removeAmount" onclick="decreaseAmount(${dish.id})" class="remove-amount">-</button>
+                        <button id="removeAmount" onclick="changeAmount(${dish.id})" class="remove-amount">-</button>
                         <p id="menuAmount-${dish.id}" class="basket-amount">${dish.amount}</p>
-                        <button id="addAmount-${dish.id}" onclick="increaseAmount(${dish.id})" class="add-amount">+</button>
+                        <button id="addAmount" onclick="changeAmount(${dish.id})" class="add-amount">+</button>
                     </div>
 
                     <p id="price-${dish.id}" class="basket-menu-price">${(dish.price * dish.amount).toFixed(2).replace(".", ",") + "€"}</p>
