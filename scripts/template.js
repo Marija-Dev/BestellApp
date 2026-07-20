@@ -85,7 +85,6 @@ function getSubTotalTemplate() {
            
 }
 
-
 function getOrderedTemplate() {
     return ` <section class="ordered-container"> 
                 <p onclick="closeOrderedDialog()" class="close-dialog-btn">x</p>
@@ -97,12 +96,7 @@ function getOrderedTemplate() {
            `
 }
 
-
 function getAddToBasketBtnTemplate(dish) {
     return `<p class="add-to-basket-text">Added ${dish.amount}</p>
            `
 }
-
-
-
-

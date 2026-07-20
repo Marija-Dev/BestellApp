@@ -104,7 +104,7 @@ h3 {
     height: 60px;
     width: 100%;
     position: absolute;
-    top: 1710px;
+    top: 1660px;
     left: 0;
 }
 
@@ -114,7 +114,7 @@ h3 {
     height: 60px;
     width: 100%;
     position: absolute;
-    top: 2580px;
+    top: 2500px;
     left: 0;
 }
 
@@ -179,8 +179,8 @@ h3 {
     height: 150px;
     width: 700px;
     background-color: rgb(221, 189, 252);
-    padding: 20px 10px 10px 10px;
-    margin: 10px 10px 10px 90px;
+    padding: 10px 10px 10px 10px;
+    margin: 10px 10px 10px 10px;
     gap: 10px;
     border-radius: 20px;
 }
@@ -258,13 +258,8 @@ footer {
     display: none;
 }
 
-.favicon {
-    filter: brightness(0) saturate(100%) invert(56%) sepia(21%) saturate(1455%) hue-rotate(200deg) brightness(90%) contrast(102%);
-    color: blueviolet;
-}
-
 /* Responsive */
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
     .basket-container {
         display: none;
     }
@@ -297,7 +292,7 @@ footer {
     }
 
     .shopping-cart-img {
-        width: 120px;
+        width: 115px;
     }
 
     .mobile-basket-dialog.open {
@@ -342,11 +337,11 @@ footer {
     }
 
     .pizza-titles-fullwidth {
-        top: 1770px;
+        top: 1730px;
     }
 
     .salad-titles-fullwidth {
-        top: 2660px;
+        top: 2580px;
     }
 
     footer {
@@ -361,6 +356,10 @@ footer {
 
     .salad-titles-fullwidth {
         top: 3790px;
+    }
+
+    .menu-content {
+        width: auto;
     }
 
     .single-menu-card {
@@ -438,16 +437,12 @@ footer {
         width: 350px;
         font-size: 18px;
     }
-
-    .single-menu-card {
-        margin-left: 50px;
-    }
 }
 
 @media (max-width: 650px) {
     .menu-content {
         margin: 0;
-        padding: 110px 0 0 30px;
+        padding: 110px 0 0 0px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -463,10 +458,6 @@ footer {
 
     .ingredients {
         width: 450px;
-    }
-
-    .single-menu-card {
-        margin-left: 20px;
     }
 }
 
@@ -589,10 +580,6 @@ footer {
         height: 600px;
     }
 
-    .single-menu-card {
-        margin-left: 40px;
-    }
-
     .burger-titles-fullwidth {
         top: 750px;
     }
@@ -607,10 +594,6 @@ footer {
 }
 
 @media (max-width: 380px) {
-    .menu-container {
-        width: auto;
-    }
-
     .menu-content {
         width: 300px;
         padding-left: 0px;
@@ -618,6 +601,5 @@ footer {
 
     .single-menu-card {
         width: 220px;
-        margin-left: 20px;
     }
 }
