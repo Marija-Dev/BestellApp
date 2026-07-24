@@ -297,8 +297,8 @@ footer {
 
     .mobile-basket-dialog.open {
         display: block;
-        width: 350px;
-        height: 550px;
+        width: 550px;
+        height: 800px;
         background-color: rgb(32, 33, 32);
         color: white;
         position: fixed;
@@ -311,8 +311,8 @@ footer {
     }
 
     .mobile-basket-menu-container {
-        height: 270px;
-        width: 360px;
+        height: 530px;
+        width: 550px;
         overflow: auto;
         overflow-x: hidden;
     }
@@ -332,8 +332,48 @@ footer {
         display: flex;
     }
 
+    .content-container {
+        display: flex;
+        justify-content: flex-end;
+    }
+
     .menu-content {
+        width: 830px;
         padding-top: 110px;
+    }
+
+    .basket-menu-card {
+        width: 500px;
+        padding-right: 10px;
+    }
+
+    .basket-menu-name {
+        width: 300px;
+    }
+
+    .delete-menu-button {
+        position: relative;
+        left: 110px
+    }
+
+    .basket-amount-container {
+        padding-right: 20px;
+    }
+
+    .sub-total-container {
+        width: 500px;
+    }
+
+    .delivery-container {
+        width: 500px;
+    }
+
+    .total-container {
+        width: 500px;
+    }
+
+    .empty-basket-note {
+        width: auto;
     }
 
     .pizza-titles-fullwidth {
@@ -358,7 +398,45 @@ footer {
         top: 3790px;
     }
 
+    .mobile-basket-dialog.open {
+        width: 350px;
+        height: 550px;
+    }
+
+    .mobile-basket-menu-container {
+        height: 270px;
+        width: 360px;
+    }
+
     .menu-content {
+        width: auto;
+    }
+
+    .basket-menu-card {
+        width: 310px;
+    }
+
+    .basket-menu-name {
+        width: 220px;
+    }
+
+    .delete-menu-button {
+        left: 0px
+    }
+
+    .sub-total-container {
+        width: 300px;
+    }
+
+    .delivery-container {
+        width: 300px;
+    }
+
+    .total-container {
+        width: 300px;
+    }
+
+    .empty-basket-note {
         width: auto;
     }
 
@@ -551,7 +629,12 @@ footer {
     }
 
     .basket-menu-card {
-        width: 210px;
+        width: 230px;
+        padding-left: 10px;
+    }
+
+    .delete-menu-button {
+        left: -30px;
     }
 
     .sub-total-container {

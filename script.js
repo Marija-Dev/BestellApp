@@ -9,6 +9,13 @@ function init() {
     updateAddToBasketBtns();
 }
 
+function renderBasketsAndUpdateButtons(id) {
+    renderBasket();
+    renderMobileBasket();
+    changeAddToBasketButton(id);
+    showBadge(id);
+}
+
 //sorts dishes into the correct container according to category
 function renderDishes() {
     let burgerRef = document.getElementById("allBurgers");
@@ -17,7 +24,6 @@ function renderDishes() {
 
     for (let indexDishes = 0; indexDishes < dishes.length; indexDishes++) {
         let dish = dishes[indexDishes];
-
         if (dish.category === "Burger & Sandwiches") {
             burgerRef.innerHTML += getMenuTemplate(dish);
         } else if (dish.category === "Pizza") {
@@ -31,24 +37,19 @@ function renderDishes() {
 // looks up a dish by ID in the basket and either increases its quantity or inserts it if missing
 function addToBasket(id) {
     let currentDish = dishes.find(dish => dish.id === id);
-    let existingDish = basket.find(element => element.id === currentDish.id); 
+    let existingDish = basket.find(element => element.id === currentDish.id);
     let newDish = {
         id: currentDish.id,
         name: currentDish.name,
         price: currentDish.price,
         amount: 1
     }
-
     if (existingDish) {
         existingDish.amount++;
     } else {
         basket.push(newDish);
     }
-
-    renderBasket();
-    renderMobileBasket();
-    changeAddToBasketButton(id);
-    showBadge(id);
+    renderBasketsAndUpdateButtons(id);
 }
 
 // changes design and text from "add to basket" button to "added 1" if dish is in basket
@@ -79,7 +80,6 @@ function resetAllAddToBasketButtons() {
 // calculates the total amount for each menu item in getBasketTemplate using its price and displays it in the HTML
 function renderBasket() {
     let basketRef = document.getElementById("addedBasketMenu");
-    let checkOutCon = document.getElementById("checkOutContainer");
     basketRef.innerHTML = "";
 
     for (let indexBasket = 0; indexBasket < basket.length; indexBasket++) {
@@ -88,18 +88,27 @@ function renderBasket() {
     }
     if (basket.length === 0) {
         basketRef.innerHTML = getEmptyBasketNoteTemplate();
+    }
+
+    calculatePrice();
+    renderBasketCheckout();
+}
+
+// renders basket checkout content, if the basket is empty, checkout content disappears
+function renderBasketCheckout() {
+    let checkOutCon = document.getElementById("checkOutContainer");
+
+    if (basket.length === 0) {
         checkOutCon.innerHTML = "";
     } else if (basket.length !== 0) {
         checkOutCon.innerHTML = getSubTotalTemplate();
     }
-    calculatePrice();
 }
 
 // renders mobile basket content, if basket empty shows "nothin in here.." message
 // calculates the total amount for each menu item in getBasketTemplate using its price and displays it in the HTML
 function renderMobileBasket() {
     let basketMobileRef = document.getElementById("mobileBasketContent");
-    let mobileCheckOut = document.getElementById("mobileCheckOutContainer");
     basketMobileRef.innerHTML = "";
 
     for (let indexBasket = 0; indexBasket < basket.length; indexBasket++) {
@@ -108,10 +117,21 @@ function renderMobileBasket() {
     }
     if (basket.length === 0) {
         basketMobileRef.innerHTML = getEmptyBasketNoteTemplate();
+    } 
+    calculatePrice();
+    renderMobileBasketCheckout();
+}
+
+// renders mobile basket checkout content, if the basket is empty, checkout content disappears
+function renderMobileBasketCheckout() {
+    let mobileCheckOut = document.getElementById("mobileCheckOutContainer");
+
+    if (basket.length === 0) {
         mobileCheckOut.innerHTML = "";
     } else if (basket.length !== 0) {
         mobileCheckOut.innerHTML = getSubTotalTemplate();
     }
+
     calculatePrice();
 }
 
@@ -125,10 +145,7 @@ function deleteDish(id) {
 
     basket.splice(indexBasket, 1);
 
-    renderBasket();
-    renderMobileBasket();
-    changeAddToBasketButton(id);
-    showBadge(id);
+    renderBasketsAndUpdateButtons(id);
 }
 
 // changes the amount of a single dish in the basket; if the amount is 1 and the user clicks "-", the dish is removed
@@ -144,10 +161,7 @@ function changeAmount(id) {
         deleteDish(id);
     }
 
-    renderBasket();
-    renderMobileBasket();
-    changeAddToBasketButton(id);
-    showBadge(id);
+    renderBasketsAndUpdateButtons(id);
 }
 
 // calculates the total price of all dishes and renders it in the container matching the className
@@ -155,26 +169,27 @@ function calculatePrice() {
     let subTotal = document.getElementsByClassName("sub-price");
     let deliveryFee = document.getElementsByClassName("delivery-price");
     let total = document.getElementsByClassName("total-price");
-    let buyNow = document.getElementsByClassName("buy-now-button");
-    let subTotalSum = basket.reduce((sum, dish) => sum + dish.price * dish.amount, 0); //rechnet preis aller im basket befindlichen gerichte zusammen
+    let subTotalSum = basket.reduce((sum, dish) => sum + dish.price * dish.amount, 0);
 
     for (let i = 0; i < subTotal.length; i++) {
         subTotal[i].innerHTML = subTotalSum.toFixed(2).replace(".", ",") + "€";
         deliveryFee[i].innerHTML = delivery.toFixed(2).replace(".", ",") + "€";
         total[i].innerHTML = (subTotalSum + delivery).toFixed(2).replace(".", ",") + "€";
-        buyNow[i].innerHTML = "Buy now " + "(" + (subTotalSum + delivery).toFixed(2).replace(".", ",") + "€" + ")";
     }
 
     saveToLocalStorage();
+    buyNow();
 }
 
 // calculates the price of all dishes and displays it in the "buyNow" - button 
 function buyNow() {
     let buyNowPrice = document.getElementsByClassName("buy-now-price");
-    let subTotalSum = basket.reduce((sum, dish) => sum + dish.price * dish.amount, 0); //rechnet gesamtsumme im basket aus, ohne delivery
+    let subTotalSum = basket.reduce((sum, dish) => sum + dish.price * dish.amount, 0);
+    let buyNow = document.getElementsByClassName("buy-now-button");
 
-    for (let i = 0; i < buyNowPrice.length; i++) {
-        buyNowPrice[i].innerHTML = "(" + (subTotalSum + delivery).toFixed(2).replace(".", ",") + "€" + ")";
+
+    for (let i = 0; i < buyNow.length; i++) {
+        buyNow[i].innerHTML = "Buy now " + "(" + (subTotalSum + delivery).toFixed(2).replace(".", ",") + "€" + ")";
     }
 }
 
@@ -191,7 +206,7 @@ function openOrderedDialog(id) {
     emptyMobileBasket();
 }
 
-// empties the basket content and hides the basket for 5 seconds
+// empties the basket content
 function emptyBasket() {
     let basket = document.getElementById("myBasket");
     let basketRef = document.getElementById("addedBasketMenu");
@@ -204,28 +219,41 @@ function emptyBasket() {
         basketCheckOutCon.innerHTML = "";
     }
 
+    deleteItems();
+    removesBasket();
+}
+
+// hides the basket for 5 seconds
+function removesBasket() {
+    let basket = document.getElementById("myBasket");
+
     setTimeout(() => {
         basket.classList.remove("remove-basket");
     }, 5000);
-    deleteItems();
 }
 
 // clears all basket items and temporarily hides the basket for 5 seconds
-function emptyMobileBasket() {
+function emptyMobileBasket(id) {
     let mobileBasketRef = document.getElementById("mobileBasketContent");
     let mobileCheckOutContainer = document.getElementById("mobileCheckOutContainer");
-    let clickedButton = event.target.id; //gibt die id des angeklickten button aus
+    let clickedButton = event.target.id;
 
-    if (clickedButton === "buyNowButton" || clickedButton === "buyNowPrice") { //vergleicht angeklickte id mit: "buyNowButton"  oder "buyNowPrice" id, ...
-        mobileBasketDialog.classList.remove("open"); //... bzw entfernt hier mobile basket
+    if (clickedButton === "buyNowButton" || clickedButton === "buyNowPrice") {
+        mobileBasketDialog.classList.remove("open");
         mobileBasketRef.innerHTML = getEmptyBasketNoteTemplate();
         mobileCheckOutContainer.innerHTML = "";
     }
 
+    deleteItems();
+    removeMobileBasket();
+    showBadge(id);
+}
+
+// hides the mobile basket for 5 seconds
+function removeMobileBasket() {
     setTimeout(() => {
         mobileBasketDialog.classList.add("open");
     }, 5000);
-    deleteItems();
 }
 
 // auto-closes the "order done" dialog 5 seconds after the order is done
@@ -269,7 +297,6 @@ function showBadge(id) {
     } else if (!currentDish) {
         badge.innerHTML = totalAmount;
     }
-
     if ((!currentDish && totalAmount === 0) || (clickedButton === "buyNowButton")) {
         badge.classList.add("badge-hide");
     }
@@ -301,6 +328,6 @@ function getFromLocalStorage() {
 
 // clears all data from localstorage
 function deleteItems() {
-  localStorage.clear();
+    localStorage.clear();
 }
 
