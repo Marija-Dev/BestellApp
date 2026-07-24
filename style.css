@@ -252,6 +252,7 @@ footer {
     display: flex;
     justify-content: center;
     gap: 80px;
+    flex-grow: 0;
 }
 
 .mobile-basket-dialog {
@@ -296,9 +297,11 @@ footer {
     }
 
     .mobile-basket-dialog.open {
-        display: block;
+        display: flex;
+        flex-direction: column;
         width: 550px;
         height: 800px;
+        min-height: calc(100dvh - 140px);
         background-color: rgb(32, 33, 32);
         color: white;
         position: fixed;
@@ -315,6 +318,7 @@ footer {
         width: 550px;
         overflow: auto;
         overflow-x: hidden;
+        flex: 1;
     }
 
     .mobile-basket-menu-container::-webkit-scrollbar {
@@ -326,10 +330,6 @@ footer {
     .mobile-basket-menu-container::-webkit-scrollbar-thumb {
         background-color: blueviolet;
         border-radius: 20px;
-    }
-
-    .mobile-basket {
-        display: flex;
     }
 
     .content-container {
@@ -634,7 +634,7 @@ footer {
     }
 
     .delete-menu-button {
-        left: -30px;
+        left: -15px;
     }
 
     .sub-total-container {
